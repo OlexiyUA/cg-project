@@ -5,6 +5,11 @@ let zMax = 5.1;
 let sens = 0.001;
 // Maximum number of iterations for each point on the complex plane
 const maxiterations = 66;
+let dimension = 560;
+
+function getElementByXpath(path) {
+  return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+}
 
 // Colors to be used for each possible iteration count
 const colorsRed = [];
@@ -13,12 +18,13 @@ const colorsBlue = [];
 
 function setup() {
   pixelDensity(1);
-  createCanvas(600, 600);
+  var cnv = createCanvas(dimension, dimension);
+  var div = getElementByXpath("/html/body/div/div[2]/div[2]");
+  div.appendChild(canvas);
   colorMode(HSB, 1);
 
-  // Create the colors to be used for each possible iteration count
   for (let n = 0; n < maxiterations; n++) {
-    // Gosh, we could make fancy colors here if we wanted
+
     let hu = sqrt(n / maxiterations);
     let col = color(hu, 255, 150);
     colorsRed[n] = red(col);

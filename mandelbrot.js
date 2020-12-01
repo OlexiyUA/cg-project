@@ -16,11 +16,18 @@ let zMin = 0.5;
 let zMax = 5;
 let sens = 0.001;
 
+let dimension = 560;
+
+function getElementByXpath(path) {
+  return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+}
+
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(dimension, dimension);
+  var div = getElementByXpath("/html/body/div/div[2]/div[2]");
+  div.appendChild(canvas);
   pixelDensity(1);
 
-  frDiv = createDiv('');
 }
 
 function draw() {

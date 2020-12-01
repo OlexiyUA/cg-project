@@ -1,15 +1,56 @@
 <html>
 <head>
-  <meta charset="UTF-8">
-  <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
-  <!-- uncomment lines below to include extra p5 libraries -->
-
-  <!--<script language="javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/addons/p5.sound.min.js"></script>-->
-  <script language="javascript" type="text/javascript" src="mandelbrot.js"></script>
-  <!-- this line removes any default padding and style. you might only need one of these values set. -->
+    <meta charset="UTF-8">
+    <!--<script language="javascript" src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/addons/p5.sound.min.js"></script>-->
+    <script language="javascript" type="text/javascript" src="mandelbrot.js"></script>  <script
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
 </head>
 
 <body>
-    <a href="julia.html">Julia set</a>
+    <div class="container-fluid">
+        <br>
+
+    	<div class="row">
+    		<div class="col-md-4">
+
+    			<button type="button" class="btn active btn-block btn-lg btn-primary">
+    				Фрактали
+    			</button>
+    		</div>
+    		<div class="col-md-4">
+
+    			<button type="button" class="btn btn-block btn-primary disabled btn-lg">
+    				Зміна колірної схеми
+    			</button>
+    		</div>
+    		<div class="col-md-4">
+
+    			<button type="button" class="btn btn-block disabled btn-primary btn-lg">
+    				Афінні перетворення
+    			</button>
+    		</div>
+    	</div>
+
+        <br>
+
+    	<div class="row">
+    		<div class="col-md-4 well">
+
+    			<button type="button" class="btn btn-block btn-primary disabled">
+    				Мандельброта
+    			</button>
+    			<button type="button" onclick="location.href='julia.html';" class="btn btn-block btn-primary">
+    				Жюліа
+    			</button>
+    		</div>
+    		<div class="col-md-8 well">
+    		</div>
+    	</div>
+    </div>
 </body>
 </html>
