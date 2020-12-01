@@ -1,7 +1,3 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/6z7GQewK-Ks
 
 var minval = -0.5;
 var maxval = 0.5;
@@ -18,13 +14,10 @@ let sens = 0.001;
 
 let dimension = 560;
 
-function getElementByXpath(path) {
-  return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-}
 
 function setup() {
   createCanvas(dimension, dimension);
-  var div = getElementByXpath("/html/body/div/div[2]/div[2]");
+  var div = window.document.getElementById("canvasDiv");
   div.appendChild(canvas);
   pixelDensity(1);
 
@@ -75,10 +68,7 @@ function draw() {
 
 
 function mouseWheel(event) {
-
-  //move the square according to the vertical scroll amount
   zoom += sens * event.delta;
   zoom = constrain(zoom, zMin, zMax);
-  //uncomment to block page scrolling
-  //return false;
+  return false;
 }
