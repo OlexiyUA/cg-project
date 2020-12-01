@@ -12,12 +12,12 @@ let zMin = 0.5;
 let zMax = 5;
 let sens = 0.001;
 
-let dimension = 560;
+let dimension = 800;
 
 
 function setup() {
+  let div = window.document.getElementById("canvasDiv");
   createCanvas(dimension, dimension);
-  var div = window.document.getElementById("canvasDiv");
   div.appendChild(canvas);
   pixelDensity(1);
 

@@ -5,7 +5,7 @@ let zMax = 5.1;
 let sens = 0.001;
 
 const maxiterations = 66;
-let dimension = 560;
+let dimension = 800;
 
 const colorsRed = [];
 const colorsGreen = [];

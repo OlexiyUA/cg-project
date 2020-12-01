@@ -1,3 +1,37 @@
 html, body {
   overflow-x: hidden;
+  background: url(img/WhiteBlackColorGradient.png);
+  background-size:cover;
+}
+.headerButton{
+  height: 50px;
+  width: 100%;
+  border-radius: .3rem;
+  position: relative;
+  -webkit-text-stroke: 1px #FFFFFF; /* width and color */
+  border: solid white 2px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 23px;
+  color: #000000;
+}
+
+#fractalButton {
+  background: url(img/800px-Mandel_zoom_00_mandelbrot_set.jpg);
+  background-position: center;
+}
+
+#colorSchemaButton {
+  background: url(img/color-wheel-complementary-colors-primary-color-magenta-colours.jpg);
+  background-position: center;
+}
+
+#AffineTransformationButton {
+  background: url(img/nboeL7Ax3N-affine-transformation-translation.jpg);
+  background-position: center;
+}
+
+.bg-light {
+  background-color: rgba(248,249,250,0.4)!important;
 }

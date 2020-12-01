@@ -2,33 +2,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Mandelbrot Set</title>
-    <script language="javascript" type="text/javascript" src="mandelbrot.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
+	<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="container-fluid">
-        <br>
 
     	<div class="row">
     		<div class="col-md-4">
 
-    			<button type="button" class="btn active btn-block btn-lg btn-primary">
+    			<button type="button" id="fractalButton" class="headerButton btn">
     				Фрактали
     			</button>
     		</div>
     		<div class="col-md-4">
 
-    			<button type="button" class="btn btn-block btn-primary disabled btn-lg">
+    			<button type="button" id="colorSchemaButton" class="headerButton btn">
     				Зміна колірної схеми
     			</button>
     		</div>
     		<div class="col-md-4">
 
-    			<button type="button" class="btn btn-block disabled btn-primary btn-lg">
+    			<button type="button" id="AffineTransformationButton" class="headerButton btn">
     				Афінні перетворення
     			</button>
     		</div>
@@ -37,18 +51,47 @@
         <br>
 
     	<div class="row">
-    		<div class="col-md-4 well">
+    		<div class="col-md-4 card card-body bg-light">
 
-    			<button type="button" class="btn btn-block btn-primary disabled">
+    			<button type="button" class="btn purple-gradient rounded-pill disabled">
     				Мандельброта
     			</button>
-    			<button type="button" onclick="location.href='julia.html';" class="btn btn-block btn-primary">
+    			<button type="button" onclick="location.href='julia.html';" class="btn purple-gradient rounded-pill">
     				Жюліа
-    			</button>
+				</button>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-outline-secondary rounded-pill" data-toggle="modal" data-target="#exampleModal">
+					Допомога
+				</button>
     		</div>
-    		<div id="canvasDiv" class="col-md-8 well">
+    		<div id="canvasDiv" class="col-md-8 card card-body bg-light">
     		</div>
     	</div>
-    </div>
+	</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			</div>
+			<div class="modal-body">
+			...
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+		</div>
+	</div>
+
+
+	<script language="javascript" type="text/javascript" src="mandelbrot.js"></script>
 </body>
 </html>
