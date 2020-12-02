@@ -4,6 +4,12 @@ let zMax = 5;
 let sens = 0.001;
 
 let dimension = 800;
+var maxiterations = 100;
+
+
+const colorsRed = [];
+const colorsGreen = [];
+const colorsBlue = [];
 
 
 function setup() {
@@ -11,11 +17,20 @@ function setup() {
   createCanvas(dimension, dimension);
   div.appendChild(canvas);
   pixelDensity(1);
+  colorMode(HSB, 1);
+
+  for (let n = 0; n < maxiterations; n++) {
+
+      let hu = sqrt(n / maxiterations);
+      let col = color(hu, 255, 150);
+      colorsRed[n] = red(col);
+      colorsGreen[n] = green(col);
+      colorsBlue[n] = blue(col);
+  }
 
 }
 
 function draw() {
-  var maxiterations = 100;
 
   loadPixels();
   for (var x = 0; x < width; x++) {
@@ -33,7 +48,7 @@ function draw() {
         var bb = 2 * a * b;
         a = aa + ca;
         b = bb + cb;
-        if (a * a + b * b > 16) {
+        if (a * a + b * b > 4) {
           break;
         }
         n++;
@@ -47,10 +62,17 @@ function draw() {
       }
 
       var pix = (x + y * width) * 4;
-      pixels[pix + 0] = bright;
-      pixels[pix + 1] = bright;
-      pixels[pix + 2] = bright;
-      pixels[pix + 3] = 255;
+      if (n == maxiterations) {
+        pixels[pix + 0] = 0;
+        pixels[pix + 1] = 0;
+        pixels[pix + 2] = 0;
+        pixels[pix + 3] = 255;
+      } else {
+        pixels[pix + 0] = colorsRed[n];
+        pixels[pix + 1] = colorsGreen[n];
+        pixels[pix + 2] = colorsBlue[n];
+        pixels[pix + 3] = 255;
+      }
     }
   }
   updatePixels();
