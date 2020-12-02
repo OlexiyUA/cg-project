@@ -1,12 +1,3 @@
-
-var minval = -0.5;
-var maxval = 0.5;
-
-var minSlider;
-var maxSlider;
-
-var frDiv;
-
 let zoom = 2.5;
 let zMin = 0.5;
 let zMax = 5;
