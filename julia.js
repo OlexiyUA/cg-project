@@ -34,7 +34,6 @@ function draw() {
   $("#CXMOUSE").text(ca);
   $("#CYMOUSE").text(cb);
 
-
   background(255);
 
   let w = zoom;
