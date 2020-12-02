@@ -29,8 +29,10 @@ function setup() {
 }
 
 function draw() {
-  let ca = map(mouseX, 0, width, -1, 1); //-0.70176;
-  let cb = map(mouseY, 0, height, -1, 1); //-0.3842;
+  let ca = map(mouseX, 0, width, -1, 1);
+  let cb = map(mouseY, 0, height, -1, 1); 
+  $("#CXMOUSE").text(ca);
+  $("#CYMOUSE").text(cb);
 
 
   background(255);
