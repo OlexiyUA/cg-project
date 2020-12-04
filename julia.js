@@ -7,32 +7,106 @@ let sens = 0.001;
 const maxiterations = 66;
 let dimension = 800;
 
+
+let dark = false;
+
 const colorsRed = [];
 const colorsGreen = [];
 const colorsBlue = [];
 
-function setup() {
-    pixelDensity(1);
-    createCanvas(dimension, dimension);
-    var div = window.document.getElementById("canvasDiv");
-    div.appendChild(canvas);
+
+function beginning() {
+    $("#hueDiv")[0].style.display = "none";
     colorMode(HSB, 1);
-
     for (let n = 0; n < maxiterations; n++) {
-
         let hu = sqrt(n / maxiterations);
-        let col = color(hu, 255, 150);
+        let col = color(hu, 1, 1);
         colorsRed[n] = red(col);
         colorsGreen[n] = green(col);
         colorsBlue[n] = blue(col);
     }
 }
 
+function lightSchemeChange() {
+    colorMode(HSB, 1);
+    for (let n = 0; n < maxiterations; n++) {
+        let hu = sqrt((n + 1) / maxiterations);
+        let hue = $("#hueRange")[0].value / 360;
+        let col = color(hue, hu, 1);
+        colorsRed[n] = red(col);
+        colorsGreen[n] = green(col);
+        colorsBlue[n] = blue(col);
+    }
+}
+
+function darkSchemeChange() {
+    colorMode(HSB, 1);
+    for (let n = 0; n < maxiterations; n++) {
+        let hu = sqrt((n + 1) / maxiterations);
+        let hue = $("#hueRange")[0].value / 360;
+        let col = color(hue, 0.8, hu);
+        colorsRed[n] = red(col);
+        colorsGreen[n] = green(col);
+        colorsBlue[n] = blue(col);
+    }
+}
+
+$("#monochromeScheme").change(
+    function() {
+        $("#hueDiv")[0].style.display = "none";
+
+        colorMode(RGB, 255);
+        for (let n = 0; n < maxiterations; n++) {
+            var bright = map(n, 0, maxiterations, 0, 1);
+            bright = map(sqrt(bright), 0, 1, 0, 255);
+            colorsRed[n] = bright;
+            colorsGreen[n] = bright;
+            colorsBlue[n] = bright;
+        }
+    }
+);
+
+$("#rainbowScheme").change(beginning);
+
+$("#lightScheme").change(
+    function() {
+        $("#hueDiv")[0].style.display = "block";
+        dark = false;
+        lightSchemeChange();
+    }
+);
+
+$("#darkScheme").change(
+    function() {
+        $("#hueDiv")[0].style.display = "block";
+        dark = true;
+        darkSchemeChange();
+    }
+);
+
+$("#hueRange").change(
+    function() {
+        if (dark) {
+            darkSchemeChange();
+        } else {
+            lightSchemeChange();
+        }
+    }
+);
+
+function setup() {
+    pixelDensity(1);
+    createCanvas(dimension, dimension);
+    var div = window.document.getElementById("canvasDiv");
+    div.appendChild(canvas);
+    beginning();
+}
+
 function draw() {
   let ca = map(mouseX, 0, width, -1, 1);
-  let cb = map(mouseY, 0, height, -1, 1); 
-  $("#CXMOUSE").text(ca);
-  $("#CYMOUSE").text(cb);
+  let cb = map(mouseY, 0, height, -1, 1);
+  $("#CXMOUSE").text(ca.toFixed(6));
+  $("#CYMOUSE").text(cb.toFixed(6));
 
   background(255);
 
