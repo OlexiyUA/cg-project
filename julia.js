@@ -84,7 +84,7 @@ $("#darkScheme").change(
     }
 );
 
-$("#hueRange").change(
+$("#hueRange").mousemove(
     function() {
         if (dark) {
             darkSchemeChange();
