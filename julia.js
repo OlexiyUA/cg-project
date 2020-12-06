@@ -98,6 +98,16 @@ $("#darkScheme").change(
     }
 );
 
+$("#hueRange").change(
+    function() {
+        if (dark) {
+            darkSchemeChange();
+        } else {
+            lightSchemeChange();
+        }
+    }
+);
+
 $("#hueRange").mousemove(
     function() {
         if (dark) {

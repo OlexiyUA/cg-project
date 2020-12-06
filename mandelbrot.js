@@ -108,6 +108,16 @@ $("#hueRange").change(
     }
 );
 
+$("#hueRange").mousemove(
+    function() {
+        if (dark) {
+            darkSchemeChange();
+        } else {
+            lightSchemeChange();
+        }
+    }
+);
+
 function setup() {
     var canvas = createCanvas(dimension, dimension);
     canvas.parent("canvasDiv");
