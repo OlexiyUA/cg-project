@@ -6,7 +6,7 @@ let sens = 0.001;
 let dark = false;
 
 let dimension = 0;
-if (window.innerWidth < 800) {
+if (window.innerWidth < 768) {
     dimension = Math.round(window.innerWidth * 0.9);
 } else {
     dimension = Math.round(window.innerHeight * 0.8);
@@ -21,7 +21,7 @@ const colorsBlue = [];
 
 
 $( window ).resize(function() {
-    if (window.innerWidth < 800) {
+    if (window.innerWidth < 768) {
         dimension = Math.round(window.innerWidth * 0.9);
     } else {
         dimension = Math.round(window.innerHeight * 0.8);
