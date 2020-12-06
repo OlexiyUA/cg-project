@@ -5,7 +5,13 @@ let sens = 0.001;
 
 let dark = false;
 
-let dimension = 800;
+let dimension = 0;
+if (window.innerWidth < 800) {
+    dimension = Math.round(window.innerWidth * 0.9);
+} else {
+    dimension = Math.round(window.innerHeight * 0.8);
+}
+
 var maxiterations = 100;
 
 
@@ -13,6 +19,15 @@ const colorsRed = [];
 const colorsGreen = [];
 const colorsBlue = [];
 
+
+$( window ).resize(function() {
+    if (window.innerWidth < 800) {
+        dimension = Math.round(window.innerWidth * 0.9);
+    } else {
+        dimension = Math.round(window.innerHeight * 0.8);
+    }
+    resizeCanvas(dimension, dimension);
+});
 
 function beginning() {
     $("#hueDiv")[0].style.display = "none";
@@ -94,9 +109,8 @@ $("#hueRange").change(
 );
 
 function setup() {
-    let div = window.document.getElementById("canvasDiv");
-    createCanvas(dimension, dimension);
-    div.appendChild(canvas);
+    var canvas = createCanvas(dimension, dimension);
+    canvas.parent("canvasDiv");
     pixelDensity(1);
     beginning();
 
