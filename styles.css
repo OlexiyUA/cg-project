@@ -18,6 +18,14 @@ html, body {
   color: #000000;
 }
 
+p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    font-family: "Segoe UI";
+}
+
 #fractalButton {
   background: url(img/800px-Mandel_zoom_00_mandelbrot_set.jpg);
   background-position: center;
