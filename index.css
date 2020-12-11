@@ -1,0 +1,42 @@
+html, body {
+    overflow-x: hidden;
+    background: url(img/BackgroundColor.png);
+    background-size:cover;
+}
+  
+.ComputerGraficText{
+    font-family: Monotype Corsiva;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 54px;
+    line-height: 81px;
+    /* identical to box height */
+    text-align: center;
+    color: #000000;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+  }
+
+.MainCircleImage{
+    border: 3px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.MyCardText{
+    /* font-family: Roboto; */
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: justify;
+}
+
+.OleksiiBoreikoMykolaLehkyiText{
+    font-family: Monotype Corsiva;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 40px;
+    text-align: center;
+}

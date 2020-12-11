@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mandelbrot Set</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col ComputerGraficText">Computer graphics</div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card-transparent mb-3">
+                    <div class="view overlay">
+                        <img class="card-img-top MainCircleImage" src="img/MandelbrotFractal.png"
+                            alt="Card image cap" />
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p class="card-text">
+                            <button type="button" id="fractalButton" class="btn rounded-pill blue-gradient w-100">
+                                Фрактали
+                            </button>
+                        </p>
+                        <p class="card-text MyCardText">В цьому модулі Ви маєте можливість будувати фрактали
+                            Мандельброта і Жюліа, масштабувати, малювати та зберігати їх! </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="view overlay">
+                    <img class="card-img-top MainCircleImage"
+                        src="img/color-wheel-complementary-colors-primary-color-magenta-colours.png"
+                        alt="Card image cap" />
+                    <a href="#!">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+                <p class="card-text">
+                    <a type="button" id="colorSchemaButton" class="btn rounded-pill purple-gradient w-100">
+                        Зміна колірної схеми
+                    </a>
+                </p>
+                <div class="card-transparent mb-3">
+                    <p class="card-text MyCardText">У цьому модулі Ви можете завантажити будь-яке зображення, змінити
+                        колірні моделі та яскравість по синьому</p>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="card-transparent mb-3">
+                    <div class="view overlay">
+                        <img class="card-img-top MainCircleImage"
+                            src="img/nboeL7Ax3N-affine-transformation-translation_Proportional.jpg"
+                            alt="Card image cap" />
+                        <a href="#!">
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text">
+                            <a href="#" id="AffineTransformationButton"
+                                class="btn rounded-pill young-passion-gradient text-white w-100 mask rgba-white-slight">
+                                Афінні перетворення
+                            </a>
+                        <p class="card-text"></p>
+                        <p class="card-text MyCardText">В цьому модулі ви можете будувати квадрат і з допомогою афінних
+                            перетворень
+                            ви можете рухати, крутити та маштабувати їх</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col OleksiiBoreikoMykolaLehkyiText">Oleksii Boreiko & Mykola Lehkyi <br>2020</div>
+        </div>
+    </div>
+</body>
+
+</html>
