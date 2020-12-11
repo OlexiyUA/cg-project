@@ -57,8 +57,22 @@
 
                 <div class="form-check" id="blueDiv">
                     <label for="blueRange">Яскравість по синьому</label>
-                    <input type="range" class="custom-range" min="0" max="255" id="blueRange">
+                    <input type="range" class="custom-range" min="0" max="200" value="0" id="blueRange">
                 </div>
+
+
+				<div class="container bg-light">
+					<div class="row ">
+						<div class="col bg-light h6">
+							Значення кольорів:
+						</div>
+					</div>
+					<div class="col">
+						<div class="row h6">RGB: <span id="RGBstr"></span></div>
+						<div class="row h6">HSV: <span id="HSVstr"></span></div>
+						<div class="row h6">CMYK: <span id="CMYKstr"></span></div>
+					</div>
+				</div>
 
 				<button type="button" class="btn btn-outline-secondary rounded-pill" data-toggle="modal" data-target="#helpUserModal">
 					Допомога
@@ -80,25 +94,6 @@
                         </p>
                         <div id="canvasColorDiv">
                             <canvas id="canvasColor" width="300" height="300"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            Зображення в колірній моделі HSV:
-                        </p>
-                        <div id="canvasHSVDiv">
-                            <canvas id="canvasHSV" width="300" height="300"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <p>
-                            Зображення в колірній моделі CMYK:
-                        </p>
-                        <div id="canvasCMYKDiv">
-                            <canvas id="canvasCMYK" width="300" height="300"></canvas>
                         </div>
                     </div>
                 </div>
@@ -128,7 +123,7 @@
 		</div>
 	</div>
 
-    <img src="img/model_example.jpeg" id="hiddenImg" style="display: none;" /> 
+    <img src="img/model_example.jpeg" id="hiddenImg" style="display: none;" />
 
 	<script language="javascript" type="text/javascript" src="models.js"></script>
 </body>
