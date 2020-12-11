@@ -20,24 +20,29 @@ $("#blueRange").mousemove(
 function loadImageFromFile() {
 	let fileInput = $("#fileInput")[0];
 
+    image = new Image();
+
+    image.onload = function() {
+        let context = canvasOrig.getContext('2d');
+        canvasOrig.height = canvasOrig.clientHeight;
+        canvasOrig.width = canvasOrig.clientWidth;
+        context.clearRect(0, 0, canvasOrig.width, canvasOrig.height);
+        context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasOrig.width, canvasOrig.height);
+
+        changeBlueValue();
+    }
+
+    let fileReader = new FileReader();
+    fileReader.onload = function() {
+        image.src = this.result;
+    }
+
 	if (fileInput.files.length == 1) {
 		let file = fileInput.files[0];
-		let fileReader = new FileReader();
-		image = new Image();
-		fileReader.onload = function() {
-			image.src = this.result;
-		}
 		fileReader.readAsDataURL(file);
-		image.onload = function() {
-			let context = canvasOrig.getContext('2d');
-			canvasOrig.height = canvasOrig.clientHeight;
-			canvasOrig.width = canvasOrig.clientWidth;
-			context.clearRect(0, 0, canvasOrig.width, canvasOrig.height);
-			context.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvasOrig.width, canvasOrig.height);
-
-            changeBlueValue();
-		}
-	}
+	} else {
+        image.src = "img/model_example.jpeg";
+    }
 }
 
 async function changeBlueValue() {
@@ -53,3 +58,5 @@ async function changeBlueValue() {
 	}
 	canvasColor.getContext('2d').putImageData(RGBcolor, 0, 0);
 }
+
+loadImageFromFile();
