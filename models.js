@@ -2,19 +2,43 @@ var canvasOrig = $("#canvasOrig")[0];
 var canvasColor = $("#canvasColor")[0];
 let image = null;
 let cords = null;
+let endCords = null;
 let savedData = null;
+let defaultMask = [];
+let zeroMask = [];
+for (let i = 0; i < canvasOrig.height; ++i) {
+    defaultMask[i] = [];
+    zeroMask[i] = [];
+    for (let j = 0; j < canvasOrig.width; ++j) {
+        defaultMask[i][j] = 1;
+        zeroMask[i][j] = 0;
+    }
+}
+let anotherMask = null;
+let AAA = 0;
 
 $("#blueRange").change(
     function() {
-        changeBlueValue();
+        changeBlueValue(anotherMask);
     }
 );
 
 $("#blueRange").mousemove(
     function() {
-        changeBlueValue();
+        changeBlueValue(anotherMask);
     }
 );
+
+function copy2dArray(arr) {
+    let copied = []
+    for (let i = 0; i < arr.length; ++i) {
+        copied[i] = [];
+        for (let j = 0; j < arr[i].length; ++j) {
+            copied[i][j] = arr[i][j];
+        }
+    }
+    return copied;
+}
 
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
@@ -35,17 +59,70 @@ function getRgbPixel(canvas, mouseX, mouseY) {
     };
 }
 
+$("#selectionRemoval").click(
+    function() {
+        if (savedData == null)
+            return;
+
+    	let prevData = canvasOrig.getContext('2d').getImageData(0, 0, canvasOrig.width, canvasOrig.height);
+        let pos;
+
+        for (let i = 0; i < canvasOrig.height; ++i) {
+            for (let j = 0; j < canvasOrig.width; ++j) {
+                pos = i * canvasOrig.width + j;
+                pos *= 4;
+                for (let k = 0; k < 4; ++k) {
+                    prevData.data[pos + k] = savedData[pos + k];
+                }
+            }
+        }
+
+    	canvasOrig.getContext('2d').putImageData(prevData, 0, 0);
+        changeBlueValue();
+        savedData = null;
+        anotherMask = copy2dArray(zeroMask);
+    }
+);
+
 $("#canvasOrig").mousedown(
     function(event) {
-        cords = getMousePos(canvasOrig, events);
+        cords = getMousePos(canvasOrig, event);
     }
 );
 
 $("#canvasOrig").mouseup(
     function(event) {
-        let endcords = getMousePos(canvasOrig, events);
-        savedData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+        if (cords == null)
+            return;
 
+        if (anotherMask == null) {
+            anotherMask = copy2dArray(zeroMask);
+        }
+
+        if (savedData == null) {
+            savedData = canvasOrig.getContext('2d').getImageData(0, 0, canvasOrig.width, canvasOrig.height).data.slice();
+        }
+
+        endCords = getMousePos(canvasOrig, event);
+        let ctx = canvasOrig.getContext('2d')
+        ctx.beginPath();
+        ctx.lineWidth = "1px";
+        ctx.strokeStyle = "red";
+        ctx.rect(cords.x, cords.y, endCords.x - cords.x, endCords.y - cords.y);
+        ctx.stroke();
+
+        let xmin = Math.min(cords.x, endCords.x);
+        let xmax = Math.max(cords.x, endCords.x);
+        let ymin = Math.min(cords.y, endCords.y);
+        let ymax = Math.max(cords.y, endCords.y);
+
+        for (let i = ymin; i < ymax; ++i) {
+            for (let j = xmin; j < xmax; ++j) {
+                anotherMask[i][j] = 1;
+            }
+        }
+
+        changeBlueValue(anotherMask);
     }
 );
 
@@ -117,23 +194,40 @@ function loadImageFromFile() {
 	if (fileInput.files.length == 1) {
 		let file = fileInput.files[0];
 		fileReader.readAsDataURL(file);
-	} else {
+        savedData = null;
+        anotherMask = copy2dArray(zeroMask);
+	} else if (AAA == 0){
         image.src = "img/model_example.jpeg";
+        AAA = 1;
     }
 }
 
-async function changeBlueValue() {
+async function changeBlueValue(mask = defaultMask) {
     if (image == null)
         return;
+        
+    if (mask == null)
+        mask = defaultMask;
 
 	let blueValue = $("#blueRange")[0].value;
 
-	let RGBcolor = canvasOrig.getContext('2d').getImageData(0, 0, canvasOrig.width, canvasOrig.height);
+    let aData;
+    if (savedData == null) {
+        aData = canvasOrig.getContext('2d').getImageData(0, 0, canvasOrig.width, canvasOrig.height).data;
+    } else {
+        aData = savedData.slice();
+    }
 
-	for (let i = 0; i < RGBcolor.data.length; i += 4) {
-		RGBcolor.data[i + 2] *= (blueValue / 100);
-	}
-	canvasColor.getContext('2d').putImageData(RGBcolor, 0, 0);
+    for (let i = 0; i < canvasOrig.height; ++i) {
+        for (let j = 0; j < canvasOrig.width; ++j) {
+            pos = i * canvasOrig.width + j;
+            pos *= 4;
+            if (mask[i][j] === 1) {
+                aData[pos + 2] *= (blueValue / 100);
+            }
+        }
+    }
+	canvasColor.getContext('2d').putImageData(new ImageData(aData, canvasOrig.width), 0, 0);
 }
 
 function hsv2rgb(hue, saturation, value) {
@@ -206,7 +300,6 @@ function rgb2hsv(r, g, b) {
     };
 }
 
-
 function rgb2cmyk(r, g, b) {
     let c = 1 - r / 255;
     let m = 1 - g / 255;
@@ -214,7 +307,12 @@ function rgb2cmyk(r, g, b) {
 
     let k = Math.min(c, m, y);
     if (k == 1) {
-        return [0, 0, 0, 1];
+        return {
+            c: 0,
+            m: 0,
+            y: 0,
+            k: 1
+        };
     }
 
     return {
@@ -244,7 +342,5 @@ function cmyk2rgb(c, m, y, k) {
         b: b
     };
 }
-
-
 
 loadImageFromFile();
