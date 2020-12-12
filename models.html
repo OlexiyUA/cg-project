@@ -53,18 +53,8 @@
     	<div class="row">
     		<div class="col-md-4 card card-body bg-light">
 
-                <input id="fileInput" type="file" name="" onchange="loadImageFromFile()" accept="image/*">
-
-                <div class="form-check" id="blueDiv">
-                    <label for="blueRange">Яскравість по синьому</label>
-                    <input type="range" class="custom-range" min="0" max="200" value="0" id="blueRange">
-                </div>
-
-
-				<button type="button" id="selectionRemoval" class="btn btn-outline-secondary rounded-pill">
-					Зняти виділення області
-				</button>
-
+                <input id="fileInput" style="overflow:hidden" type="file" name="" onchange="loadImageFromFile()" accept="image/*">
+                <br>
 				<div class="container bg-light">
 					<div class="row ">
 						<div class="col bg-light h6">
@@ -72,12 +62,19 @@
 						</div>
 					</div>
 					<div class="col">
+                        <div class="row form-check" id="blueDiv">
+                            <label for="blueRange">Значення по синьому</label>
+                            <input type="range" class="custom-range" min="0" max="200" value="0" id="blueRange">
+                        </div>
 						<div class="row h6">RGB: <span id="RGBstr"></span></div>
 						<div class="row h6">HSV: <span id="HSVstr"></span></div>
 						<div class="row h6">CMYK: <span id="CMYKstr"></span></div>
 					</div>
 				</div>
 
+				<button type="button" id="selectionRemoval" class="btn btn-outline-secondary rounded-pill">
+					Зняти виділення області
+				</button>
 				<button type="button" class="btn btn-outline-secondary rounded-pill" data-toggle="modal" data-target="#helpUserModal">
 					Допомога
 				</button>
@@ -111,14 +108,25 @@
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-			<h5 class="modal-title" id="helpUserModal">Фрактал Мендельброта</h5>
+			<h5 class="modal-title" id="helpUserModal">Колірні моделі</h5>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
 			</div>
 			<div class="modal-body">
-                Це множина комплексних чисел, які при ітеративному процесі залишаються обмеженими в певному абсолютному значенні.
-                Для масштабу використовуйте колесико миші.
+                CMYK - субтрактивна модель, вона використовується для підготовки не екранних, а  друкованих  зображень,
+                тобто  для  пристроїв,  які  реалізують  принцип поглинання (віднімання) кольорів. Базові кольори моделі CMYK:
+                C - Cyan (блакитний), M - Magenta (пурпурний), Y - Yellow (жовтий) , K - Black (чорний).
+                <br><br>
+                Колірна модель HSV (hue (тон), saturation (насиченість), value (значення кольору)) була розроблена з метою
+                забезпечення художника засобами інтуїтивного вибору кольору. HSV ближче до людського сприйняття кольорів.
+                <br><br>
+                Для зміни яскравості та насиченості зображення чи фрагментів використовуйте повзунок під кнопкою вибору файлу.
+                <br><br>
+                Для вибору фрагментів зображення виділіть частини зображення, проводячи курсором від одного кута діагоналі
+                прямокутного виділення до іншого. Для зміни яскравості цілого зображення після вибору фрагментів натисніть кнопку
+                "Зняти виділення області".
+
 			</div>
 			<div class="modal-footer">
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>

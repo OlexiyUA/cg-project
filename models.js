@@ -1,6 +1,6 @@
 var canvasOrig = $("#canvasOrig")[0];
 var canvasColor = $("#canvasColor")[0];
-let image = null;
+let image = new Image();
 let cords = null;
 let endCords = null;
 let savedData = null;
@@ -14,18 +14,24 @@ for (let i = 0; i < canvasOrig.height; ++i) {
         zeroMask[i][j] = 0;
     }
 }
+
 let anotherMask = null;
-let AAA = 0;
 
 $("#blueRange").change(
     function() {
-        changeBlueValue(anotherMask);
+        if (savedData == null)
+            changeBlueValue();
+        else
+            changeBlueValue(anotherMask);
     }
 );
 
 $("#blueRange").mousemove(
     function() {
-        changeBlueValue(anotherMask);
+        if (savedData == null)
+            changeBlueValue();
+        else
+            changeBlueValue(anotherMask);
     }
 );
 
@@ -170,8 +176,6 @@ $("#canvasColor").mouseout(
 function loadImageFromFile() {
 	let fileInput = $("#fileInput")[0];
 
-    image = new Image();
-
     image.onload = function() {
         let context = canvasOrig.getContext('2d');
         canvasOrig.height = canvasOrig.clientHeight;
@@ -196,16 +200,15 @@ function loadImageFromFile() {
 		fileReader.readAsDataURL(file);
         savedData = null;
         anotherMask = copy2dArray(zeroMask);
-	} else if (AAA == 0){
+	} else if (!image.src) {
         image.src = "img/model_example.jpeg";
-        AAA = 1;
     }
 }
 
 async function changeBlueValue(mask = defaultMask) {
     if (image == null)
         return;
-        
+
     if (mask == null)
         mask = defaultMask;
 
