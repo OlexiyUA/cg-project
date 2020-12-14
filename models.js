@@ -128,6 +128,7 @@ $("#canvasOrig").mouseup(
             }
         }
 
+        cords = null;
         changeBlueValue(anotherMask);
     }
 );
