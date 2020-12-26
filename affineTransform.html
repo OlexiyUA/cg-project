@@ -2,7 +2,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Mandelbrot Set</title>
+	<title>Affine tranformations</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
@@ -34,7 +34,7 @@
 		<div class="row">
 			<div class="col-md-4">
 
-				<button type="button" id="fractalButton" class="headerButton btn disabled">
+				<button type="button" onclick="location.href='mandelbrot.html'" id="fractalButton" class="headerButton btn">
 					Фрактали
 				</button>
 			</div>
@@ -47,7 +47,7 @@
 			</div>
 			<div class="col-md-4">
 
-				<button type="button" id="AffineTransformationButton" class="headerButton btn">
+				<button type="button" id="AffineTransformationButton" class="headerButton btn disabled">
 					Афінні перетворення
 				</button>
 			</div>
@@ -104,13 +104,13 @@
 							<label class="form-check-label" for="TranslationX">
 								X
 							</label>
-							<input class="form-control-inline numberTranslation" type="number" id="TranslationX" value="1" step="0.1" />
+							<input class="form-control-inline numberTranslation" type="number" id="TranslationX" value="1" step="1" />
 						</div>
 						<div class="col m-1">
 							<label class="form-check-label" for="TranslationY">
 								Y
 							</label>
-							<input class="form-control-inline numberTranslation" type="number" id="TranslationY" value="3" step="0.1" />
+							<input class="form-control-inline numberTranslation" type="number" id="TranslationY" value="3" step="1" />
 						</div>
 					</div>
 				</div>
@@ -126,13 +126,13 @@
 							<label class="form-check-label" for="ScaleX">
 								X
 							</label>
-							<input class="form-control-inline numberScale" type="number" id="ScaleX" value="2" step="0.1" />
+							<input class="form-control-inline numberScale" type="number" id="ScaleX" value="2" step="1" />
 						</div>
 						<div class="col m-1">
 							<label class="form-check-label" for="ScaleY">
 								Y
 							</label>
-							<input class="form-control-inline numberScale" type="number" id="ScaleY" value="2" step="0.1" />
+							<input class="form-control-inline numberScale" type="number" id="ScaleY" value="2" step="1" />
 						</div>
 					</div>
 				</div>

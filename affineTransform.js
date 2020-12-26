@@ -163,9 +163,9 @@ function getSquareFromDiagonal(){
 
 function drawRectangleArray(color){
     ctx.beginPath();
-    ctx.moveTo(rectangleArray[0][0]*grid_size,rectangleArray[0][1]*grid_size);
+    ctx.moveTo(rectangleArray[0][0]*grid_size,-rectangleArray[0][1]*grid_size);
     for (let i = 1; i < rectangleArray.length; i++) {
-        ctx.lineTo(rectangleArray[i][0]*grid_size,rectangleArray[i][1]*grid_size);
+        ctx.lineTo(rectangleArray[i][0]*grid_size,-rectangleArray[i][1]*grid_size);
     }
     ctx.closePath();
     ctx.strokeStyle = color;
@@ -229,7 +229,7 @@ function multiplyMatrix(matrix1, matrix2){
     return resultMatrix;
 } 
 
-$('.numberDiagonal').change(() => {
+$('.numberDiagonal').keyup(() => {
         redrawCoordinates();
         getSquareFromDiagonal();
         applyTranslation();
@@ -239,7 +239,7 @@ $('.numberDiagonal').change(() => {
     }
 )
 
-$('.numberTranslation').change(() => {
+$('.numberTranslation').keyup(() => {
     redrawCoordinates();
     getSquareFromDiagonal();
     applyTranslation();
@@ -249,7 +249,7 @@ $('.numberTranslation').change(() => {
 }
 )
 
-$('.numberScale').change(() => {
+$('.numberScale').keyup(() => {
     redrawCoordinates();
     getSquareFromDiagonal();
     applyTranslation();
@@ -259,7 +259,7 @@ $('.numberScale').change(() => {
 }
 )
 
-$('.numberAngle').change(() => {
+$('.numberAngle').keyup(() => {
     redrawCoordinates();
     getSquareFromDiagonal();
     applyTranslation();
