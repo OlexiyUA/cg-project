@@ -282,14 +282,14 @@ redrawRectangle();
 
 function mouseWheel(event) {
     if(event.originalEvent.wheelDelta /120 > 0) {
-        grid_size += 3;
+        grid_size = (grid_size+3).between(1,200)?(grid_size+3):grid_size;
         x_axis_distance_grid_lines = canvas_width/grid_size/2;
         y_axis_distance_grid_lines = canvas_height/grid_size/2;
         x_axis_starting_point.number = (x_axis_starting_point.number - 2).between(1,10,true) ? (x_axis_starting_point.number - 2): x_axis_starting_point.number;
         y_axis_starting_point.number = (y_axis_starting_point.number - 2).between(1,10,true) ? (y_axis_starting_point.number - 2): y_axis_starting_point.number;
     }
     else{
-        grid_size -= 3;
+        grid_size = (grid_size-3).between(1,200)?(grid_size-3):grid_size;;
         x_axis_distance_grid_lines = canvas_width/grid_size/2;
         y_axis_distance_grid_lines = canvas_height/grid_size/2;
         x_axis_starting_point.number = (x_axis_starting_point.number + 2).between(1,10,true) ? (x_axis_starting_point.number + 2): x_axis_starting_point.number;
