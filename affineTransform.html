@@ -68,13 +68,13 @@
 							<label class="form-check-label" for="SquareDiagonalX1">
 								X1
 							</label>
-							<input class="form-control-inline" type="number" id="SquareDiagonalX1" value="1" step="0.1" />
+							<input class="form-control-inline numberDiagonal" type="number" id="SquareDiagonalX1" value="1" step="0.1" />
 						</div>
 						<div class="col m-1">
 							<label class="form-check-label" for="SquareDiagonalY1">
 								Y1
 							</label>
-							<input class="form-control-inline" type="number" id="SquareDiagonalY1" value="1" step="0.1" />
+							<input class="form-control-inline numberDiagonal" type="number" id="SquareDiagonalY1" value="1" step="0.1" />
 						</div>
 					</div>
 					<div class="row">
@@ -82,13 +82,13 @@
 							<label class="form-check-label" for="SquareDiagonalX2">
 								X2
 							</label>
-							<input class="form-control-inline" type="number" id="SquareDiagonalX2" value="3" step="0.1" />
+							<input class="form-control-inline numberDiagonal" type="number" id="SquareDiagonalX2" value="3" step="0.1" />
 						</div>
 						<div class="col m-1">
 							<label class="form-check-label" for="SquareDiagonalY2">
 								Y2
 							</label>
-							<input class="form-control-inline" type="number" id="SquareDiagonalY2" value="3" step="0.1" />
+							<input class="form-control-inline numberDiagonal" type="number" id="SquareDiagonalY2" value="3" step="0.1" />
 						</div>
 					</div>
 				</div>
@@ -104,13 +104,13 @@
 							<label class="form-check-label" for="TranslationX">
 								X
 							</label>
-							<input class="form-control-inline" type="number" id="TranslationX" value="1" step="0.1" />
+							<input class="form-control-inline numberTranslation" type="number" id="TranslationX" value="1" step="0.1" />
 						</div>
 						<div class="col m-1">
 							<label class="form-check-label" for="TranslationY">
 								Y
 							</label>
-							<input class="form-control-inline" type="number" id="TranslationY" value="1" step="0.1" />
+							<input class="form-control-inline numberTranslation" type="number" id="TranslationY" value="3" step="0.1" />
 						</div>
 					</div>
 				</div>
@@ -126,13 +126,13 @@
 							<label class="form-check-label" for="ScaleX">
 								X
 							</label>
-							<input class="form-control-inline" type="number" id="ScaleX" value="1" step="0.1" />
+							<input class="form-control-inline numberScale" type="number" id="ScaleX" value="2" step="0.1" />
 						</div>
 						<div class="col m-1">
 							<label class="form-check-label" for="ScaleY">
 								Y
 							</label>
-							<input class="form-control-inline" type="number" id="ScaleY" value="1" step="0.1" />
+							<input class="form-control-inline numberScale" type="number" id="ScaleY" value="2" step="0.1" />
 						</div>
 					</div>
 				</div>
@@ -145,12 +145,15 @@
 					</div>
 					<div class="row">
 						<div class="col m-1">
-							<input class="form-control" type="number" id="Angle" value="0" step="0.1" />
+							<input class="form-control numberAngle" type="number" id="Angle" value="45" step="0.1" />
 						</div>
 					</div>
 				</div>
 
 				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-outline-secondary rounded-pill" onclick="redrawRectangle()">
+					Перемалювати
+				</button>
 				<button type="button" class="btn btn-outline-secondary rounded-pill" data-toggle="modal"
 					data-target="#helpUserModal">
 					Допомога
