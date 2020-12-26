@@ -145,7 +145,7 @@
 					</div>
 					<div class="row">
 						<div class="col m-1">
-							<input class="form-control numberAngle" type="number" id="Angle" value="45" step="0.1" />
+							<input class="form-control numberAngle" type="number" id="Angle" value="45" step="1" />
 						</div>
 					</div>
 				</div>
@@ -157,6 +157,9 @@
 				<button type="button" class="btn btn-outline-secondary rounded-pill" data-toggle="modal"
 					data-target="#helpUserModal">
 					Допомога
+				</button>
+				<button type="button" class="btn btn-outline-secondary rounded-pill" onclick="location.href='index.html'">
+					&#9664 Назад
 				</button>
 			</div>
 			<div id="canvasDiv" class="col-md-8 card card-body bg-light">
@@ -180,9 +183,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					Це множина комплексних чисел, які при ітеративному процесі залишаються обмеженими в певному
-					абсолютному значенні.
-					Для масштабу використовуйте колесико миші.
+					Зручний інтерфейс побудови фігури та її переміщення, розтягнення, повороту.
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
