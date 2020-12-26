@@ -11,8 +11,7 @@ var ctx = canvas.getContext("2d");
 var canvas_width = canvas.width;
 var canvas_height = canvas.height;
 
-var num_lines_x = Math.floor(canvas_height/grid_size);
-var num_lines_y = Math.floor(canvas_width/grid_size);
+
 
 function redrawCoordinates(){
     // Store the current transformation matrix
@@ -21,7 +20,8 @@ function redrawCoordinates(){
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Restore the transform
+    var num_lines_x = Math.floor(canvas_height/grid_size);
+    var num_lines_y = Math.floor(canvas_width/grid_size);
 
         // Draw grid lines along X-axis
     for(var i=0; i<=num_lines_x; i++) {
@@ -163,9 +163,9 @@ function getSquareFromDiagonal(){
 
 function drawRectangleArray(color){
     ctx.beginPath();
-    ctx.moveTo(rectangleArray[0][0]*grid_size,-rectangleArray[0][1]*grid_size);
+    ctx.moveTo(rectangleArray[0][0]/x_axis_starting_point.number*grid_size,-rectangleArray[0][1]/y_axis_starting_point.number*grid_size);
     for (let i = 1; i < rectangleArray.length; i++) {
-        ctx.lineTo(rectangleArray[i][0]*grid_size,-rectangleArray[i][1]*grid_size);
+        ctx.lineTo(rectangleArray[i][0]/x_axis_starting_point.number*grid_size,-rectangleArray[i][1]/y_axis_starting_point.number*grid_size);
     }
     ctx.closePath();
     ctx.strokeStyle = color;
@@ -279,3 +279,33 @@ function redrawRectangle(){
 }
 
 redrawRectangle();
+
+function mouseWheel(event) {
+    if(event.originalEvent.wheelDelta /120 > 0) {
+        grid_size += 3;
+        x_axis_distance_grid_lines = canvas_width/grid_size/2;
+        y_axis_distance_grid_lines = canvas_height/grid_size/2;
+        x_axis_starting_point.number = (x_axis_starting_point.number - 2).between(1,10,true) ? (x_axis_starting_point.number - 2): x_axis_starting_point.number;
+        y_axis_starting_point.number = (y_axis_starting_point.number - 2).between(1,10,true) ? (y_axis_starting_point.number - 2): y_axis_starting_point.number;
+    }
+    else{
+        grid_size -= 3;
+        x_axis_distance_grid_lines = canvas_width/grid_size/2;
+        y_axis_distance_grid_lines = canvas_height/grid_size/2;
+        x_axis_starting_point.number = (x_axis_starting_point.number + 2).between(1,10,true) ? (x_axis_starting_point.number + 2): x_axis_starting_point.number;
+        y_axis_starting_point.number = (y_axis_starting_point.number + 2).between(1,10,true) ? (y_axis_starting_point.number + 2): y_axis_starting_point.number;
+    }
+
+    redrawRectangle();
+    return false;
+}
+
+$(document).ready(function(){
+    $('#canvasAffineTransform').bind('mousewheel', mouseWheel);
+});
+
+Number.prototype.between = function(a, b, inclusive) {
+    var min = Math.min.apply(Math, [a, b]),
+      max = Math.max.apply(Math, [a, b]);
+    return inclusive ? this >= min && this <= max : this > min && this < max;
+  };
