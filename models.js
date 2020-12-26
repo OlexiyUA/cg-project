@@ -1,3 +1,11 @@
+const fullCircle = 360;
+const blueHue = 240;
+const blueHueNorm = blueHue / fullCircle;
+
+var hueTolerance = 0;
+var saturationDiff = 0;
+var brightnessDiff = 0;
+
 var canvasOrig = $("#canvasOrig")[0];
 var canvasColor = $("#canvasColor")[0];
 let image = new Image();
@@ -17,8 +25,9 @@ for (let i = 0; i < canvasOrig.height; ++i) {
 
 let anotherMask = null;
 
-$("#blueRange").change(
+$("#hueRange").change(
     function() {
+        hueTolerance = $("#hueRange")[0].value / fullCircle;
         if (savedData == null)
             changeBlueValue();
         else
@@ -26,8 +35,49 @@ $("#blueRange").change(
     }
 );
 
-$("#blueRange").mousemove(
+$("#hueRange").mousemove(
     function() {
+        hueTolerance = $("#hueRange")[0].value / fullCircle;
+        if (savedData == null)
+            changeBlueValue();
+        else
+            changeBlueValue(anotherMask);
+    }
+);
+
+$("#saturationRange").change(
+    function() {
+        saturationDiff = $("#saturationRange")[0].value / 100.0;
+        if (savedData == null)
+            changeBlueValue();
+        else
+            changeBlueValue(anotherMask);
+    }
+);
+
+$("#saturationRange").mousemove(
+    function() {
+        saturationDiff = $("#saturationRange")[0].value / 100.0;
+        if (savedData == null)
+            changeBlueValue();
+        else
+            changeBlueValue(anotherMask);
+    }
+);
+
+$("#brightnessRange").change(
+    function() {
+        brightnessDiff = $("#brightnessRange")[0].value / 100.0;
+        if (savedData == null)
+            changeBlueValue();
+        else
+            changeBlueValue(anotherMask);
+    }
+);
+
+$("#brightnessRange").mousemove(
+    function() {
+        brightnessDiff = $("#brightnessRange")[0].value / 100.0;
         if (savedData == null)
             changeBlueValue();
         else
@@ -213,8 +263,6 @@ async function changeBlueValue(mask = defaultMask) {
     if (mask == null)
         mask = defaultMask;
 
-	let blueValue = $("#blueRange")[0].value;
-
     let aData;
     if (savedData == null) {
         aData = canvasOrig.getContext('2d').getImageData(0, 0, canvasOrig.width, canvasOrig.height).data;
@@ -227,7 +275,20 @@ async function changeBlueValue(mask = defaultMask) {
             pos = i * canvasOrig.width + j;
             pos *= 4;
             if (mask[i][j] === 1) {
-                aData[pos + 2] *= (blueValue / 100);
+                var pixel = {
+                    r: aData[pos],
+                    g: aData[pos + 1],
+                    b: aData[pos + 2]
+                };
+                var pixelHsv = rgb2hsv(pixel.r, pixel.g, pixel.b);
+                if (checkHueTolerance(blueHueNorm, hueTolerance, pixelHsv.h)) {
+                    pixelHsv.s += saturationDiff;
+                    pixelHsv.v += brightnessDiff;
+                    var pixelRgb = hsv2rgb(pixelHsv.h, pixelHsv.s, pixelHsv.v);
+                    aData[pos] = pixelRgb.r;
+                    aData[pos + 1] = pixelRgb.g;
+                    aData[pos + 2] = pixelRgb.b;
+                }
             }
         }
     }
@@ -235,6 +296,21 @@ async function changeBlueValue(mask = defaultMask) {
 }
 
 function hsv2rgb(hue, saturation, value) {
+    if (hue < 0 || hue > 1) {
+        hue = hue - Math.floor(hue);
+    }
+    if (saturation < 0) {
+        saturation = 0;
+    }
+    if (saturation > 1) {
+        saturation = 1;
+    }
+    if (value < 0) {
+        value = 0;
+    }
+    if (value > 1) {
+        value = 1;
+    }
     let chroma = value * saturation;
     let hue1 = hue * 6;
     let x = chroma * (1 -  Math.abs((hue1 % 2) - 1));
@@ -345,6 +421,40 @@ function cmyk2rgb(c, m, y, k) {
         g: g,
         b: b
     };
+}
+
+function checkHueTolerance(neededHue, tolerance, currentHue) {
+    if (tolerance < 0) {
+        return false;
+    }
+    if (currentHue > 1) {
+        currentHue = currentHue % 1;
+    }
+    if (currentHue < 0) {
+        currentHue = currentHue % 1 + 1;
+    }
+    if (currentHue < neededHue + tolerance && currentHue > neededHue - tolerance) {
+        return true;
+    }
+    if (neededHue + tolerance > 1) {
+        if ((neededHue + tolerance) % 1 > currentHue) {
+            return true;
+        }
+    }
+    if (neededHue - tolerance < 0) {
+        if ((neededHue - tolerance) % 1 + 1 < currentHue) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function testHueTolerance (neededHue, tolerance) {
+    var a = {0: checkHueTolerance(neededHue, tolerance, 0)};
+    for (var i = 0.01; i <= 1; i += 0.01) {
+        a[i] = checkHueTolerance(neededHue, tolerance, i);
+    }
+    console.log(a);
 }
 
 loadImageFromFile();

@@ -66,8 +66,12 @@
 					</div>
 					<div class="col">
                         <div class="row form-check" id="blueDiv">
-                            <label for="blueRange">Значення по синьому</label>
-                            <input type="range" class="custom-range" min="0" max="200" value="0" id="blueRange">
+                            <label for="blueRange">Відхилення від синього</label>
+                            <input type="range" class="custom-range" min="0" max="180" value="0" id="hueRange">
+                            <label for="saturationRange">Насиченість по синьому</label>
+                            <input type="range" class="custom-range" min="-100" max="100" value="0" id="saturationRange">
+                            <label for="brightnessRange">Яскравість по синьому</label>
+                            <input type="range" class="custom-range" min="-100" max="100" value="0" id="brightnessRange">
                         </div>
 						<div class="row h6">RGB: <span id="RGBstr"></span></div>
 						<div class="row h6">HSV: <span id="HSVstr"></span></div>
