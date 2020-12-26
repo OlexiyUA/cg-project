@@ -1,0 +1,195 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Mandelbrot Set</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-md-4">
+
+				<button type="button" id="fractalButton" class="headerButton btn disabled">
+					Фрактали
+				</button>
+			</div>
+			<div class="col-md-4">
+
+				<button type="button" onclick="location.href='models.html';" id="colorSchemaButton"
+					class="headerButton btn">
+					Зміна колірної схеми
+				</button>
+			</div>
+			<div class="col-md-4">
+
+				<button type="button" id="AffineTransformationButton" class="headerButton btn">
+					Афінні перетворення
+				</button>
+			</div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-4 card card-body bg-light">
+				<div class="container bg-light">
+					<div class="row ">
+						<div class="col bg-light h6">
+							Координати діагоналі квадрата
+						</div>
+					</div>
+					<div class="row">
+						<div class="col m-1">
+							<label class="form-check-label" for="SquareDiagonalX1">
+								X1
+							</label>
+							<input class="form-control-inline" type="number" id="SquareDiagonalX1" value="1" step="0.1" />
+						</div>
+						<div class="col m-1">
+							<label class="form-check-label" for="SquareDiagonalY1">
+								Y1
+							</label>
+							<input class="form-control-inline" type="number" id="SquareDiagonalY1" value="1" step="0.1" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col m-1">
+							<label class="form-check-label" for="SquareDiagonalX2">
+								X2
+							</label>
+							<input class="form-control-inline" type="number" id="SquareDiagonalX2" value="3" step="0.1" />
+						</div>
+						<div class="col m-1">
+							<label class="form-check-label" for="SquareDiagonalY2">
+								Y2
+							</label>
+							<input class="form-control-inline" type="number" id="SquareDiagonalY2" value="3" step="0.1" />
+						</div>
+					</div>
+				</div>
+
+				<div class="container bg-light">
+					<div class="row ">
+						<div class="col bg-light h6">
+							Зміщення
+						</div>
+					</div>
+					<div class="row">
+						<div class="col m-1">
+							<label class="form-check-label" for="TranslationX">
+								X
+							</label>
+							<input class="form-control-inline" type="number" id="TranslationX" value="1" step="0.1" />
+						</div>
+						<div class="col m-1">
+							<label class="form-check-label" for="TranslationY">
+								Y
+							</label>
+							<input class="form-control-inline" type="number" id="TranslationY" value="1" step="0.1" />
+						</div>
+					</div>
+				</div>
+
+				<div class="container bg-light">
+					<div class="row ">
+						<div class="col bg-light h6">
+							Маштабування
+						</div>
+					</div>
+					<div class="row">
+						<div class="col m-1">
+							<label class="form-check-label" for="ScaleX">
+								X
+							</label>
+							<input class="form-control-inline" type="number" id="ScaleX" value="1" step="0.1" />
+						</div>
+						<div class="col m-1">
+							<label class="form-check-label" for="ScaleY">
+								Y
+							</label>
+							<input class="form-control-inline" type="number" id="ScaleY" value="1" step="0.1" />
+						</div>
+					</div>
+				</div>
+
+				<div class="container bg-light">
+					<div class="row ">
+						<div class="col bg-light h6">
+							Поворот
+						</div>
+					</div>
+					<div class="row">
+						<div class="col m-1">
+							<input class="form-control" type="number" id="Angle" value="0" step="0.1" />
+						</div>
+					</div>
+				</div>
+
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-outline-secondary rounded-pill" data-toggle="modal"
+					data-target="#helpUserModal">
+					Допомога
+				</button>
+			</div>
+			<div id="canvasDiv" class="col-md-8 card card-body bg-light">
+				<div id="canvasAffineTransformDiv">
+					<canvas id="canvasAffineTransform" width="600" height="600"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="helpUserModal" tabindex="-1" role="dialog" aria-labelledby="helpUserModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="helpUserModal">Фрактал Мендельброта</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					Це множина комплексних чисел, які при ітеративному процесі залишаються обмеженими в певному
+					абсолютному значенні.
+					Для масштабу використовуйте колесико миші.
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script language="javascript" type="text/javascript" src="affineTransform.js"></script>
+</body>
+
+</html>
