@@ -209,8 +209,8 @@ function applyAngle(){
     let angle = parseFloat($('#Angle').val());
     let angleRadians = angle * Math.PI /180;
     var angleMatrix = [
-        [Math.cos(angleRadians), -Math.sin(angleRadians)],
-        [Math.sin(angleRadians), Math.cos(angleRadians)]
+        [Math.cos(angleRadians), Math.sin(angleRadians)],
+        [-Math.sin(angleRadians), Math.cos(angleRadians)]
     ]
     rectangleArray = multiplyMatrix(rectangleArray,angleMatrix);
     return rectangleArray;
