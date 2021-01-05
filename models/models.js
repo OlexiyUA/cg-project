@@ -252,7 +252,7 @@ function loadImageFromFile() {
         savedData = null;
         anotherMask = copy2dArray(zeroMask);
 	} else if (!image.src) {
-        image.src = "img/model_example.jpeg";
+        image.src = "../img/model_example.jpeg";
     }
 }
 

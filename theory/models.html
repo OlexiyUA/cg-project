@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Color models</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
+	<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+
+    	<div class="row">
+    		<div class="col-md-4">
+
+    			<button type="button" onclick="location.href='fractals.html'" id="fractalButton" class="headerButton btn">
+    				Фрактали
+    			</button>
+    		</div>
+    		<div class="col-md-4">
+
+    			<button type="button"  onclick="location.href='models.html';" id="colorSchemaButton" class="headerButton btn disabled">
+    				Зміна колірної схеми
+    			</button>
+    		</div>
+    		<div class="col-md-4">
+
+    			<button type="button" onclick="location.href='affine.html';" id="AffineTransformationButton" class="headerButton btn">
+    				Афінні перетворення
+    			</button>
+    		</div>
+    	</div>
+
+        <br>
+
+    	<div class="row justify-content-center">
+    		<div class="col-md-6 card card-body bg-light">
+
+                <div class="" style="font-size: 14.0pt; line-height: 110%; text-indent: 1.0cm;"``>
+                    <div id="accordion">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Загальна інформація
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+								<p class="MsoNormal"><span>Люди бачать предмети тому, що вони випромінюють або відображають світло. Світло можна розглядати двозначно:&nbsp; як потік частинок різної енергії (тоді колір світла визначає енергія частинок) або як потік електромагнітних хвиль високої частоти (у цьому випадку колір визначається&nbsp; довжиною&nbsp; хвилі).&nbsp; Ми&nbsp; розглядатимемо&nbsp; <i>світло</i>&nbsp; як&nbsp; потік електромагнітних хвиль, який після взаємодії з оточуючим середовищем попадає в око, де в результаті фізичної і хімічної реакції виробляються електроімпульси,&nbsp; що&nbsp; сприймаються&nbsp; мозком&nbsp; людини. Різна&nbsp; довжина&nbsp; хвилі&nbsp; сприймається&nbsp; людьми як&nbsp; різний колір (<i>колір</i> – це один із факторів світлового випромінювання).Видиме світло з найбільшою довжиною хвилі буде червоним (780 нанометрів), із найменшою – синім (380 нанометрів). При зміні довжини хвилі кольори плавно переходять один в одний (рис.1). Чисті кольори існують лише при певних довжинах хвилі (наприклад, чистий фіолетовий – при довжині 400 нм). Найбільш чутливе око людини до зелених кольорів (520 нм), потім до червоного і синього. У видимому спектрі людське око розрізняє 120 кольорів. За&nbsp; допомогою хвильової теорії, висунутої Гюйгенсом у 1678 р., було пояснено багато властивостей світла, зокрема закони відбиття та заломлення. </span></p>
+								<p class="MsoNormal" align="center"><span><img id="Picture 8" src="./models_files/image001.jpg" height="120" width="531"></span></p>
+								<p class="MsoNormal" align="center"><i><span>Рис.1. Чутливість ока до довжини хвилі</span></i></p>
+								<p class="MsoNormal"><span>Коли&nbsp; предмети&nbsp; випромінюють&nbsp; світло (такими&nbsp; є&nbsp; монітори),&nbsp; вони мають той колір, який ми бачимо. Коли деякі предмети, наприклад, папір, відбивають світло, то їхній колір визначається кольором світла, що падає на предмет, і кольором, який ці предмети відбивають.</span></p>
+								<p class="MsoNormal"><span>&nbsp; Розглянемо,&nbsp; як&nbsp; відбувається&nbsp; сприйняття&nbsp; світла&nbsp; людським&nbsp; оком. Людське око дуже складна система. Коли очі дивляться на світ – світло попадає в око через рогівку, далі за допомогою кришталика проектується на&nbsp; сітківку&nbsp; ока,&nbsp; де&nbsp; фоторецептори&nbsp; перетворюють&nbsp; світлову&nbsp; інформацію&nbsp; в імпульси у нервових волокнах. Сітківка&nbsp; ока&nbsp; містить&nbsp; два&nbsp; принципово&nbsp; різні&nbsp; типи&nbsp; світлочутливих рецепторів:&nbsp; палички,&nbsp; які&nbsp; володіють&nbsp; широкою&nbsp; спектральною&nbsp; кривою чутливості, внаслідок чого вони не розрізняють довжини хвиль, а отже, і кольору&nbsp; та&nbsp; колбочки,&nbsp; які&nbsp; характеризуються&nbsp; вузькими&nbsp; спектральними</span><span> </span><span>кривими і тому володіють чутливістю до кольору. У кожному оці знаходиться&nbsp; біля 6 млн.&nbsp; колбочок&nbsp; і 120 млн.&nbsp; паличок (приблизно 250 млн. рецепторів на два ока).</span></p>
+								<p class="MsoNormal"><span>В&nbsp; основі&nbsp; трикомпонентної&nbsp; теорії&nbsp; світла&nbsp; лежить&nbsp; той&nbsp; факт,&nbsp; що&nbsp; в центральній&nbsp; частині&nbsp; сітківки&nbsp; знаходяться&nbsp; три&nbsp; типи&nbsp; чутливих&nbsp; до&nbsp; кольору колбочок,&nbsp; які&nbsp; відповідають&nbsp; за&nbsp; чутливість до довгих, середніх і коротких хвиль, тобто один тип колбочок реагує на&nbsp; зелений&nbsp; колір,&nbsp; другий – на червоний, а третій – на синій колір. Ці три&nbsp; кольори&nbsp; називаються&nbsp; основними (базовими).&nbsp; </span></p>
+								<p class="MsoNormal"><span>Якщо на всі три види колбочок діє однаковий рівень енергетичної яскравості,&nbsp; то&nbsp; світло&nbsp; буде&nbsp; білим.&nbsp; При&nbsp; низькому&nbsp; освітленні&nbsp; колбочки втрачають свою чутливість, зате зростає чутливість паличок, що забезпечує&nbsp; нашу&nbsp; здатність&nbsp; бачити&nbsp; при&nbsp; освітленні&nbsp; низького&nbsp; рівня,&nbsp; тому&nbsp; колбочки працюють вдень, а палички – вночі.</span></p>
+								<p class="MsoNormal"><span>Отже, <i>колір</i> – це характеристика дії випромінювання на око людини.</span></p>
+								<p class="MsoNormal"><span>Слід зауважити, що колір має і психофізичну природу, тобто сприйняття кольору носить&nbsp; суб’єктивний&nbsp; характер&nbsp; і&nbsp; залежить&nbsp; не&nbsp; тільки&nbsp; від&nbsp; фізичних&nbsp; властивостей світла, а й від інтерпретації світла зоровою системою людини.&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span></p>
+								<p class="MsoNormal"><span>Кольори, що існують в природі, діляться на ахроматичні і хроматичні. До групи ахроматичних відносяться всі білі, чорні і проміжні між ними сірі кольори. Група хроматичних кольорів включає всі кольори спектру, а також кольори, яких немає в спектрі, але є результатом змішування спектральних кольорів – золотисті, тютюнові, теракотові, пурпурні і т.д. Промені світла, потрапляючи на сітківку ока, дають відчуття кольору. </span></p>
+								<p class="MsoNormal"><span>Наука,&nbsp; що&nbsp; вивчає&nbsp; колір&nbsp; і&nbsp; його&nbsp; вимірювання,&nbsp; називається&nbsp; <i>колориметрією</i>. Вона описує загальні закономірності сприйняття кольору людиною. Основними законами колориметрії є закони змішування кольорів. Ці закони в найбільш повному вигляді були сформульовані в 1853 р. німецьким математиком Германом Грассманом.</span></p>
+								<p class="ListParagraph" style="margin-top: 0cm; margin-right: 0cm; margin-left: 49.65pt; text-align: justify; text-indent: -21.3pt;"><span>1.<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><i><span>Закон тривимірності.</span></i><span> Колір виражається в тривимірному просторі.</span><span> </span><span>Це означає, що для його опису потрібні три компоненти. Довільні чотири&nbsp; кольори&nbsp; знаходяться&nbsp; в&nbsp; лінійній&nbsp; залежності.&nbsp; Іншими&nbsp; словами, для будь-якого кольору <i>С</i> можна записати рівняння: </span></p>
+								<p class="MsoNormal" align="center"><i><span>C </span></i><span>= <i>k</i><sub>1</sub><i>C</i><sub>1</sub> + <i>k</i><sub>2</sub><i>C</i><sub>2</sub> + <i>k</i><sub>3</sub><i>C</i><sub>3</sub>,</span></p>
+								<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-left: 49.65pt; text-align: justify;"><span>де&nbsp; <i>C</i><sub>1</sub><i>,&nbsp; C</i><sub>2</sub><i>,&nbsp; C</i><sub>3</sub> – базисні,&nbsp; лінійно&nbsp; незалежні&nbsp; кольори,&nbsp; <i>k</i><sub>1</sub><i>,&nbsp; k</i><sub>2</sub><i>,&nbsp; k</i><sub>3</sub><i> </i>– коефіцієнти, що вказують на кількість змішуваних кольорів. </span></p>
+								<p class="ListParagraph" style="margin-top: 0cm; margin-right: 0cm; margin-left: 46.35pt; text-align: justify; text-indent: -18.0pt;"><span>2.<span>&nbsp;&nbsp;&nbsp;&nbsp; </span></span><i><span>Закон неперервності</span></i><span>. Якщо в суміші трьох кольорів один з них змінюється неперервно, а інші залишаються сталими, то колір суміші теж змінюється неперервно. </span></p>
+								<p class="ListParagraph" style="margin-top: 0cm; margin-right: 0cm; margin-left: 46.35pt; text-align: justify; text-indent: -18.0pt;"><span>3.<span>&nbsp;&nbsp;&nbsp;&nbsp; </span></span><i><span>Закон адитивності.</span></i><span> Колір суміші залежить тільки від кольорів компонент і не залежить від їх спектральних складових, тобто змішувана компонента в свою чергу може бути отримана змішуванням інших компонент.</span></p>
+								<p class="MsoNormal"><span>Колір може бути отриманий у процесі випромінювання та в процесі &nbsp;відбивання, тому існують два протилежних методи опису кольору: система адитивних кольорів і система субтрактивних кольорів. Для математичного опису кольору використовується поняття моделі кольору. Кольори в природі рідко&nbsp; бувають простими. Більшість кольорових відтінків&nbsp; утворюється&nbsp; змішуванням&nbsp; основних&nbsp; кольорів. &nbsp;Спосіб&nbsp; розкладання кольору на складові компоненти називається <i>моделлю кольору</i>. Вся безліч кольорів, які можуть бути створені в колірній моделі, називається колірним діапазоном. </span></p>
+								<p class="MsoNormal"><span>Колірні моделі потрібні для математичного опису спектру кольорів, видимих на екрані монітора, або на скануючих та друкуючих пристроях. Кольори представляються моделлю як результат змішення декількох базових (основних) кольорів, з яких вони складаються. Кожен базовий колір має свій діапазон інтенсивності. При складанні всіх базових кольорів з різною інтенсивністю утворюються кольори, доступні для даної моделі. Колірні діапазони моделей можуть розрізнятися. </span></p>
+                            </div>
+                        </div>
+
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Моделі
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+		                        <div class="card-header" id="headingRGB">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseRGB" aria-expanded="false" aria-controls="collapseRGB">
+		                                    RGB
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapseRGB" class="collapse" aria-labelledby="headingRGB" data-parent="#collapseTwo">
+		                            <div class="card-body">
+										<p class="MsoNormal"><span>Адитивна&nbsp; модель&nbsp; кольору&nbsp; найпростіша&nbsp; для&nbsp; розуміння.&nbsp; Вона&nbsp; є&nbsp; досить&nbsp; штучним&nbsp; прийомом,&nbsp; оскільки&nbsp; продиктована&nbsp; технологією&nbsp; виготовлення&nbsp; електронно-променевих&nbsp; трубок.&nbsp; Це апаратно-орієнтована модель, в якій кольори описуються за допомогою складання трьох базових кольорів – червоного, зеленого, синього – в різних пропорціях. Тому модель RGB називають адитивною (від англ. «add» складати, додавати). Кольори також називають колірними каналами моделі RGB. </span></p>
+										<p class="MsoNormal"><span>Модель названа за першими буквами англійських слів: </span></p>
+										<p class="MsoNormal" align="center"><i><span>R</span></i><span> (RED) – червоний;</span></p>
+										<p class="MsoNormal" align="center"><i><span>G</span></i><span> (GREEN) – зелений;</span></p>
+										<p class="MsoNormal" align="center"><i><span>B</span></i><span> (BLUE) – синій.</span></p>
+										<p class="MsoNormal"><span>Кожен з базових кольорів може приймати інтенсивність (насиченість) у діапазоні від 0 до 255. Повна кількість кольорів, які представляються цією моделлю, дорівнює 256?256?256 = 16 777 216. За допомогою моделі RGB описуються кольори, що отримуються змішуванням світлових променів. Дану модель використовують монітори, телевізори, сканери, слайд-проектори, кольорові лампи реклами і інші пристрої, в яких колір виходить шляхом змішування світлових пучків. Вона також використовується для опису кольорів на сторінках Інтернету в спеціальному шістнадцятковому вигляді (#RRGGBB).</span></p>
+										<p class="MsoNormal" align="center"><span><img id="il_fi" src="./models_files/image002.gif" alt="http://dba.med.sc.edu/price/irf/Adobe_tg/models/images/rgb_model.gif" height="244" width="400"></span></p>
+										<p class="MsoNormal" align="center"><i><span>Рис.2 Комбінації базових кольорів моделі RGB</span></i></p>
+										<p class="MsoNormal"><span>Змінюючи інтенсивність свічення кольорових крапок, можна створити велике різноманіття відтінків. Якщо інтенсивність кожного з них максимальна (255), то виходить білий колір. Відсутність всіх трьох кольорів дає чорний колір. Якщо змішуються всі кольори з однаковою інтенсивністю (але не максимальною і не мінімальною), отримуємо сірий колір. </span></p>
+										<p class="MsoNormal"><span>Для зображення адитивної моделі найчастіше застосовують одиничний куб з розподілом кольорів уздовж одиничних векторів (рис. 3). Початок відліку (0,0,0) відповідає чорному кольору. Максимальне значення RGB (1,1,1) відповідає білому кольору, (1;0;0) – червоному, (0;1;0) – зеленому, (0;0;1)&nbsp; –синьому.</span></p>
+										<p class="MsoNormal" align="center"><span><img id="rg_hi" src="./models_files/image003.jpg" alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTv2A5pxKn0ODRcfRqUs5BHByB-4Z27Sws8-clFkoZba2TlrwAuAQ" height="231" width="460"></span></p>
+										<p class="MsoNormal" align="center"><i><span>Рис. 3. Колірний куб моделі RGB</span></i></p>
+										<p class="MsoNormal"><span>На сьогодні система RGB є офіційним стандартом. Рішенням Міжнародної&nbsp; Комісії&nbsp; з&nbsp; освітлення (МКО)&nbsp; в 1931 р.&nbsp; були&nbsp; стандартизовані основні&nbsp; кольори.&nbsp; Комісія рекомендувала використовувати як <i>R, G, B</i> такі монохроматичні кольори:</span><span>&nbsp;</span><span>випромінювання хвиль довжиною для<i> R</i> – 700 нм, для <i>G</i> – 546,1 нм, для <i>B</i> – 435,8 нм.</span></p>
+										<p class="MsoNormal"><span>Недолік моделі RGB полягає в тому, що не всі кольори, утворені в ній, можна вивести на друк. Проте більше 16 млн кольорів, що представляються в RGB, виявляються цілком достатніми для практичних потреб. Іншими словами, кольори на екрані вашого монітора можуть виглядати інакше при їх виведенні на друк, причому ця відзнака може виявитися принциповою, а не обумовленою низькою якістю принтера або монітора. </span></p>
+										<p class="MsoNormal"><span>&nbsp;</span></p>
+		                            </div>
+		                        </div>
+
+		                        <div class="card-header" id="headingCMYK">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseCMYK" aria-expanded="false" aria-controls="collapseCMYK">
+		                                    CMY(CMYK)
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapseCMYK" class="collapse" aria-labelledby="headingCMYK" data-parent="#collapseTwo">
+		                            <div class="card-body">
+										<p class="MsoNormal"><span>Субтрактивна модель використовується для підготовки не екранних, а&nbsp; друкованих&nbsp; зображень,&nbsp; тобто&nbsp; для&nbsp; пристроїв,&nbsp; які&nbsp; реалізують&nbsp; принцип поглинання (віднімання) кольорів. Друковані зображення відрізняються від екранних зображень тим, що їх бачать не у світлі, що проходить, а у відбитому світлі, оскільки аркуш паперу не випромінює світло. </span></p>
+										<p class="MsoNormal"><span>Базовими кольорами моделі CMY є кольори, які виходять у результаті віднімання основних кольорів RGB від білого. Звідси назва моделі субтрактивна (від англ. «to subtract» – віднімати). Базові кольори моделі CMY: </span></p>
+										<p class="MsoNormal" align="center"><i><span>C</span></i><span> (CYAN) – блакитний = білий - червоний = зелений + синій;</span></p>
+										<p class="MsoNormal" align="center"><i><span>M</span></i><span> (MAGENTA) – пурпурний = білий - зелений = червоний + синій;</span></p>
+										<p class="MsoNormal" align="center"><i><span>Y</span></i><span> (YELLOW) – жовтий = білий - синій = червоний + зелений.</span></p>
+										<p class="MsoNormal"><span>Наприклад,&nbsp; коли&nbsp; на&nbsp; поверхню&nbsp; паперу&nbsp; нанести&nbsp; блакитний (cyan) колір, тоді червоне світло, що падає на папір, повністю поглинатиметься. Отже, блакитна фарба, так би мовити, віднімає червоний колір від білого,&nbsp; який&nbsp; є&nbsp; сумою&nbsp; червоного,&nbsp; зеленого&nbsp; і&nbsp; синього&nbsp; кольорів,&nbsp; тобто&nbsp; відбивається лише зелена та синя складові світла, що і дає блакитний&nbsp; колір. Аналогічно&nbsp; жовта&nbsp; фарба (Yellow) поглинає синій&nbsp; колір,&nbsp; а&nbsp; пурпурна (Мagenta) – зелений. Білий папір виглядає білим тому, що він відбиває всі кольори і жоден не поглинає.</span></p>
+										<p class="MsoNormal"><span>&nbsp;На рис. 4 показано, як різні комбінації блакитного, жовтого і пурпурного кольорів, що дають червоний, синій і зелений кольори. Таким чином, система координат CMY – той же куб, що і для RGB, але з початком відліку в точці, що відповідає білому кольору. Колірний куб моделі CMY наведено на рис.5. </span></p>
+										<p class="MsoNormal" align="center"><span><img id="Рисунок 4" src="./models_files/image004.jpg" alt="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQDKEevbuicJpl6o4W8b5m7fz6LaT80svbAZ9SS4e02cQ2r0q6JeA" height="254" width="269"></span></p>
+										<p class="MsoNormal" align="center"><i><span>Рис.4 Комбінації базових кольорів моделі CMYK</span></i></p>
+										<p class="MsoNormal" align="center"><i><span>&nbsp;</span></i></p>
+										<p class="MsoNormal" align="center"><span><img id="Рисунок 5" src="./models_files/image005.jpg" alt="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQl2mhtajBqmj3TsV3Jll7KNTjHF5p19TS5cL6zfWkcYBBLQXJOgA" height="250" width="265"></span></p>
+										<p class="MsoNormal" align="center"><i><span>Рис. 5. Колірний куб моделі CMYK</span></i></p>
+										<p class="MsoNormal"><span>Істотною проблемою в поліграфії є чорний колір. Теоретично його можна отримати змішуванням трьох доповнювальних фарб, але на практиці змішування цих трьох кольорів дає невизначений темно-коричневий колір. Отримати на папері чорний колір шляхом змішування трьох фарб складно і незручно через те, що реальні фарби не є абсолютно чистими, через&nbsp; великі&nbsp; витрати&nbsp; дорогого&nbsp; чорнила&nbsp; та&nbsp; високу&nbsp; вологість &nbsp;паперу&nbsp; на струменевих принтерах, а також через небажані візуальні ефекти, тому в принтерах до базових фарб CMY доводиться додавати ще й фарбу чорного кольору (blacK). Така модель кольору називається CMYK. При друці малюнка на кольоровому принтері з чотирма кольорами драйвер&nbsp; принтера&nbsp; перетворює RGB-малюнок&nbsp; у&nbsp; модель CMYK. Однак багато відтінків, створених в кольоровій системі RGB, не вдається передати при друці на принтері. А це означає, що колірне охоплення системи CMYK менше,&nbsp; ніж&nbsp; колірне&nbsp; охоплення системи RGB. Водночас варто зазначити,&nbsp; що&nbsp; лише&nbsp; частину&nbsp; кольорів,&nbsp; які &nbsp;зустрічаються в природі і сприймаються&nbsp; людським&nbsp; зором,&nbsp; можна&nbsp; відтворити&nbsp; на&nbsp; екрані&nbsp; монітора, тобто&nbsp; колірне&nbsp; охоплення&nbsp; моделі RGB вужче,&nbsp; ніж&nbsp; колірне&nbsp; охоплення людського&nbsp; ока.&nbsp; Як&nbsp; видно,&nbsp; жодна&nbsp; з&nbsp; моделей&nbsp; не&nbsp; є&nbsp; повною&nbsp; за&nbsp; колірним діапазоном.</span></p>
+										<p class="MsoNormal"><span>&nbsp;</span></p>
+		                            </div>
+		                        </div>
+
+		                        <div class="card-header" id="headingHSB">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseHSB" aria-expanded="false" aria-controls="collapseHSB">
+		                                    HSB
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapseHSB" class="collapse" aria-labelledby="headingHSB" data-parent="#collapseTwo">
+		                            <div class="card-body">
+										<p class="MsoNormal"><span>Системи кольорів RGB і СМУК базуються на обмеженнях, які накладаються апаратним забезпеченням (моніторами комп’ютерів у разі використання RGB і друкарських фарб у разі СМУК). Більш інтуїтивним способом опису кольору є представлення його у вигляді тону, насиченості і яскравості – система НSВ (Hue – тон або відтінок, Saturation – насиченість, Brightness – яскравість) (рис. 6). </span></p>
+										<p class="MsoNormal"><span>HSB не строга математична модель, але вона дуже зручна для підбору відтінків і кольорів. Ця модель заснована на моделі RGB, але має циліндричну систему координат. Будь-який колір в моделі HSB визначається своїм колірним тоном (власне кольором), насиченістю (тобто відсотком доданої до кольору білої фарби) і яскравістю (відсотком доданої чорної фарби). </span></p>
+										<p class="MsoNormal"><span>Перевага НSВ перед іншими моделями полягає в тому, що вона більше відповідає природі кольору і добре узгоджується з моделлю сприйняття кольорів людиною. Тон є еквівалентом довжини хвилі світла, насиченість – інтенсивності хвилі, а яскравість – загальної кількості світла. Модель </span><span>HSB</span><span> </span><span>відповідає поняттю кольору, яке використовують професійні художники. У них зазвичай є декілька основних фарб, а всі інші виходять додаванням до них білої і чорної. Таким чином, потрібні кольори – це деяка модифікація основних фарб: освітлених або затемнених. Хоча художники і змішують фарби, але це вже виходить за рамки моделі HSB</span><span>.</span><span> </span></p>
+										<p class="MsoNormal"><i><span>Тон</span></i><span> – це основний колір, який можна виділити в кольорі (довжина хвилі, яка переважає при випромінюванні). </span></p>
+										<p class="MsoNormal"><i><span>Насиченість кольору</span></i><span> характеризує його «чистоту»: чим вона більша, тим колір </span><span>«</span><span>чистіший» (тобто ближче до тонової хвилі). Нульова насиченість відповідає сірому кольору, а максимальна насиченість – найбільш яскравому варіанту даного кольору. Можна вважати, що зменшення насиченості відповідає додаванню білої фарби. У білому кольорі насиченість дорівнює 0, оскільки неможливо виділити його колірний тон. </span></p>
+										<p class="MsoNormal"><span>Під <i>яскравістю</i> розуміється ступінь освітленості. При нульовій яскравості колір стає чорним. Максимальна яскравість при максимальній насиченості дають найбільш виразний варіант даного кольору. Можна вважати, що яскравість показує величину чорного відтінку доданого до кольору. Яскравість чорного кольору – 0, а білого – 1.</span></p>
+										<p class="MsoNormal"><span>Графічно модель HSB можна представити у вигляді кільця, уздовж якого розташовуються відтінки кольорів. Кожному відтінку відповідає свій градус, тобто всього налічується 360 варіантів (червоний – 0, жовтий – 60, зелений – 120 градусів і так далі). На зовнішньому краю круга знаходяться чисті спектральні кольори або колірні тони (параметр <i>Н</i> вимірюється в кутових градусах, від 0 до 360). Чим ближче до центру круга розташований колір, тим менше його насиченість, тим він більш бляклий, пастельний (параметр <i>S</i> вимірюється у відсотках). Яскравість (освітленість) відображується на лінійці, перпендикулярній площині колірного круга (параметр <i>В</i> вимірюється у відсотках). Всі кольори на зовнішньому крузі мають максимальну яскравість.</span></p>
+										<p class="MsoNormal"><span>Модель HSB не є орієнтованою ні на який технічний пристрій відтворення кольорів, тому її називають апаратно незалежною.</span></p>
+										<p class="MsoNormal" align="center"><span><img src="./models_files/image006.gif" height="1" width="1">&nbsp;<img src="./models_files/image006.gif" height="1" width="1">&nbsp;<img src="./models_files/image007.gif" height="216" width="216"></span></p>
+										<p class="MsoNormal" align="center"><i><span>Рис. 6. Графічне представлення моделі HSB</span></i></p>
+										<p class="MsoNormal"><span>Недолік НSВ полягає в тому, що для роботи на моніторах комп’ютерів її необхідно перетворювати на систему RGB, а для чотирьох кольорового друку – в систему СМУК. </span></p>
+										<p class="MsoNormal"><span>&nbsp;</span></p>
+		                            </div>
+		                        </div>
+
+		                        <div class="card-header" id="headingHSV">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseHSV" aria-expanded="false" aria-controls="collapseHSV">
+		                                    HSV
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapseHSV" class="collapse" aria-labelledby="headingHSV" data-parent="#collapseTwo">
+		                            <div class="card-body">
+										<p class="MsoNormal" style="text-align: justify;"><span>Модель HSV створена Елві Смітом к 1978 році. Її зручно представляти у вигляді світлової шестигранної піраміди. При цьому по вертикальній осі відкладається значення <i>V</i>, а відстань від осі до бічної грані в горизонтальному перетині відповідає параметру <i>S</i> (за діапазон зміни цих величин приймається інтервал від нуля до одиниці) (рис. 7). Шестикутник, що лежить в основі піраміди, є проекцією колірного куба в напрямку його головної діагоналі. Тон кольору <i>H</i> задається кутом, відкладеним навколо вертикальної осі, починаючи від червоного. Точки на самій окружності відповідають чистим (максимально насиченим) кольорам. Точка в центрі відповідає нейтральному коль</span><span>о</span><span>ру мінімальної насиченості (білий, сірий, чорний – це залежить від яскравості). Тобто можна сказати, що кут нахилу вектора визначає відтінок, довжина вектора – насиченість кольору. Величина <i>S</i> змінюється від нуля на осі конуса, до одиниці на його гранях. Значенню <i>V</i>=0 відповідає вершина піраміди (чорний колір), значенню <i>V</i>=1 – основа піраміди; кольори при цьому найбільш інтенсивні. Точка з координатами <i>V</i>=1, <i>S</i>=0 – центр основи піраміди (відповідає білому кольору). Проміжні значення координати <i>V</i> при <i>S</i>=0 (тобто на осі піраміди) відповідають сірим кольорами, якщо <i>S</i>=0, то значення відтінку <i>H</i> вважається невизначеним, <i>S</i>=1, якщо точка лежить на бічній грані піраміди.</span></p>
+										<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 1cm;"><img id="Рисунок 52" src="./models_files/image008.gif" style="display: block; margin-left: auto; margin-right: auto;" height="265" width="356"><img id="Рисунок 10" src="./models_files/image009.jpg" alt="http://www.intuit.ru/department/graphics/rastrgraph/1/1_13.jpg" style="display: block; margin-left: auto; margin-right: auto;" height="226" width="233"></p>
+										<p class="MsoNormal" align="center"><i><span data-mce-mark="1">Рис. 7. Графічне представлення моделі HS</span></i><i><span data-mce-mark="1">V</span></i></p>
+										<p class="MsoNormal"><span>Колірна модель </span><span>HSV</span><span> </span><span>(тон</span><span>, </span><span>насиченість, значення кольору</span><span>) </span><span>була</span><span> </span><span>розроблена з метою забезпечення</span><span> </span><span>художника</span><span> </span><span>засобами</span><span> </span><span>інтуїтивного</span><span> </span><span>вибору</span><span> </span><span>кольору</span><span>.</span></p>
+										<p class="MsoNormal"><span>&nbsp;</span></p>
+		                            </div>
+		                        </div>
+
+		                        <div class="card-header" id="headingHSL">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseHSL" aria-expanded="false" aria-controls="collapseHSL">
+		                                    HSL
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapseHSL" class="collapse" aria-labelledby="headingHSL" data-parent="#collapseTwo">
+		                            <div class="card-body">
+										<p class="MsoNormal" style="text-align: justify;"><span>Розширенням колірної моделі HSV/HSB є HLS. Параметрами якої є Hue, Lightness, Saturation, відповідно: кольоровий тон, кількість світла(освітленість), насиченість (рис. 8). Різниця між моделями HSV/HSB і HLS полягає в заміні нелінійного компоненту «яскравість» на лінійний компонент «освітлення».</span></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>В основі колірної моделі HLS лежить система Освальда. Ця модель утворює простір у формі подвійного конуса. Колірний тон задається кутом повороту навколо вертикальної осі конусів. За початок відліку прийнятий синій колір. Кольори йдуть у спектральному порядку і замикаються пурпуровим. Отже, по вертикальній осі відкладається <i>L</i> (освітленість), а інші два параметри задаються як і в HSV/HSB. Ця модель утворює підпростір, що представляє собою подвійний конус, у якому чорний колір задається вершиною нижнього конуса і відповідає значенню <i>L</i>=0, білий колір максимальної інтенсивності задається вершиною верхнього конуса і відповідає значенню <i>L</i>=1. Максимально інтенсивні кольорові тони відповідають основі конуса з <i>L</i>=0,5, що не зовсім зручно. Тон кольору <i>H</i>, аналогічно системі HSV/HSB, задається кутом повороту. Насиченість <i>S</i> змінюється в межах від 0 до 1 і задається відстанню від вертикальної осі <i>L</i> до бічної поверхні конуса. Тобто максимально насичені кольори розташовуються при <i>L</i>=0,5 і <i>S</i>=1.</span></p>
+										<p class="MsoNormal" style="margin-bottom: 0.0001pt; text-indent: 1cm; text-align: center;"><b><span><img id="Рисунок 49" src="./models_files/image010.gif" style="display: block; margin-left: auto; margin-right: auto;" height="313" width="292"></span></b><b><span>&nbsp;</span></b><b><span><img id="Рисунок 50" src="./models_files/image011.gif" height="321" width="293"></span></b></p>
+										<p class="MsoNormal" style="text-align: center;" align="center"><i><span>Рис. 8. Графічне представлення моделі HSL</span></i><i><span>L</span></i></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>HSL добре пристосована для опису кольорів таким чином, як це властиво людині. Дивлячись на пофарбований об’єкт, людині простіше його описати за допомогою кольору, освітленості і насиченості, що і роблять дані колірні моделі. Безперечною перевагою даних моделей при побудові алгоритмів обробки зображень є простота розуміння, оскільки в їхній основі лежить природній і інтуїтивно близький людині опис кольору, адже саме людина в кінцевому рахунку і є розробником та користувачем цих алгоритмів.</span></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>&nbsp;</span></p>
+		                            </div>
+		                        </div>
+
+		                        <div class="card-header" id="headingLAB">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseLAB" aria-expanded="false" aria-controls="collapseLAB">
+		                                    LAB
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapseLAB" class="collapse" aria-labelledby="headingLAB" data-parent="#collapseTwo">
+		                            <div class="card-body">
+										<p class="MsoNormal"><span>Модель LAB базується на людському сприйнятті кольору. При однаковій інтенсивності око людини сприймає промені зеленого кольору найбільш яскравими, дещо менш яскравими – червоного кольору, і ще менш яскравими – синього. Яскравість при цьому є характеристикою сприйняття, а не характеристикою самого кольору. При розробці моделі LАВ переслідувалася мета математичного коректування нелінійності сприйняття кольору людиною.</span></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>Цій моделі віддають перевагу в основному професіонали, оскільки вона суміщає переваги як CMY, так і RGB, а саме забезпечує доступ до всіх кольорів, працюючи з досить великою швидкістю. А також вона відрізняється незвичайною побудовою, на відміну від інших колірних моделей. Побудова кольорів тут, так як і в RGB, базується на злитті трьох каналів.</span></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>Будь-який колір у колірній моделі LАВ обумовлюється параметрами <i>L</i> – яскравість (Lightness) і хроматичними складовими – двома декартовими координатами: <i>а</i>, (змінюється від зеленого до червоного, через сірий і <i>b</i> (змінюється від синього до яскраво жовтого через сірий) (рис. 9). </span><i><span>L</span></i><span> здійснює контроль за яскравістю кольорів, утворених <i>а</i> і <i>b</i>. Білий колір співставляється з максимальною інтенсивністю. <i>L</i> лежать в межах 0-100,&nbsp; <i>а</i> і <i>b</i> в межах [-200;200]. Якщо <i>a</i> і <i>b</i> рівні 0, змінюючи <i>L</i>, отримуємо зображення, що містить градації сірого (grayscale).</span></p>
+										<p class="MsoNormal" style="text-align: center;" align="center"><span><img id="Рисунок 13" src="./models_files/image012.jpg" alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpeAMRwOfkJ0kc1jNFwlXTBsaCw3b6HuJTvlBkfrKFE9sctx_xnA" height="242" width="242"></span></p>
+										<p class="MsoNormal" align="center"><i><span>Рис. 9. Графічне представлення моделі LAB</span></i></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>На відміну від кольорових просторів RGB або CMYK, які є, по суті, набором апаратних даних для відтворення кольору на папері чи на екрані монітора (колір може залежати від типу друкарської машини, марки фарб, вологості повітря в цеху чи виробника монітора і його настройок), LАВ визначає колір. Оскільки, яскравість у моделі LАВ цілком відділена від кольору, то це робить модель зручною для регулювання тонової характеристики (підвищення контрасту, виправлення похибки тонових діапазонів) і видалення кольорового шуму (у т.ч. розмивка растру і видалення регулярної структури зображень в форматі JPEG), різкості та інших тонових характеристик зображення.</span></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>Враховуючи позитивні характеристики, а саме величезний колірний обхват, модель LАВ знайшла широке застосування в програмному забезпеченні для обробки зображень, через яку відбувається конвертація даних між іншими кольоровими просторами під час їх підготовки (наприклад, з RGB сканера в CMYK друкованого пристрою).</span></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>&nbsp;</span></p>
+		                            </div>
+		                        </div>
+
+		                        <div class="card-header" id="headingXYZ">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseXYZ" aria-expanded="false" aria-controls="collapseCMYK">
+		                                    XYZ
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapseXYZ" class="collapse" aria-labelledby="headingXYZ" data-parent="#collapseTwo">
+		                            <div class="card-body">
+										<p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Протягом</span></span><span> <span class="hps">першої третини XX століття</span> <span class="hps">Міжнародна</span> <span class="hps">комісія</span> <span class="hps">з освітлення</span> <span class="hps">проводила</span> <span class="hps">дослідження</span> <span class="hps">фізіології</span> <span class="hps">людського</span> <span class="hps">зору</span>, <span class="hps">на</span> <span class="hps">основі</span> <span class="hps">яких</span> <span class="hps">у 1931</span> <span class="hps">році була запропонована</span> <span class="hps">перцептивна</span> <span class="hps">колірна</span> <span class="hps">модель</span>, що одержала назву <span class="hps">XYZ</span>.</span></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>Колірний простір моделі кольору XYZ являє собою криволінійний конус з вершиною в початку колірних координат. У міру віддалення від вершини освітлення кольорів відповідних точок, що лежать усередині цього конуса, зростає. Наведена </span><span style="font-size: 14.0pt; font-family: &#39;Arial Unicode MS&#39;;">​​</span><span>на рис. 10 видима частина колірного трикутника в моделі кольору XYZ має форму сегмента неправильної параболи. На її криволінійній межі розташовуються спектрально чисті кольори, на прямолінійній хорді – кольори, одержані змішуванням червоного і пурпурного. При видаленні від межі фігури насиченість кольору зменшується і в центрі розташовується ахроматична точка.</span></p>
+										<p class="MsoNormal" style="text-align: center;" align="center"><span><img id="Рисунок 62" src="./models_files/image013.jpg" alt="http://fictionbook.ru/static/bookimages/02/03/56/02035615.bin.dir/h/i_024.png" height="221" width="262"></span></p>
+										<p class="MsoNormal" align="center"><i><span>Рис. 10. Графічне представлення моделі </span></i><i><span>XYZ</span></i></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>Оскільки працювати з об’ємним поданням колірного простору у вигляді неправильного конуса не дуже зручно, на практиці частіше користуються нормованим колірним простором, який отримав назву xyY.</span></p>
+										<p class="MsoNormal" align="center"><span><img id="Рисунок 15" src="./models_files/image014.jpg" alt="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRv0oyqfscEZGNRZTvAtwAiti5whAu1Dx24fkQzSGUtTOLIKkvxzQ" height="252" width="266"></span></p>
+										<p class="MsoNormal" align="center"><i><span>Рис. 11. Графічне представлення моделі </span></i><i><span>xyZ</span></i></p>
+										<p class="MsoNormal"><span>&nbsp;&nbsp;&nbsp;&nbsp;Ця назва пояснюється тим, що в нормованому варіанті координати <i>х </i>і <i>y</i> зберігаються, а координата <i>z</i> зникає, оскільки цей варіант колірного простору двомірний (колірна діаграма або локус). Вона будується шляхом проектування трикутника кольору на площину <i>xy</i> за формулами:</span></p>
+										<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image015.gif" style="display: block; margin-left: auto; margin-right: auto;" height="47" width="448"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (1)</span></p>
+										<p class="MsoNormal" style="text-indent: 1.0cm;"><span>Яскравість можна отримати координатою <i>Y</i>, а <i>X,</i></span><i><span> </span></i><i><span>Z</span></i><span> визначити із формул:</span></p>
+										<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image016.gif" style="display: block; margin-left: auto; margin-right: auto;" height="51" width="193"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (2)</span></p>
+										<p class="MsoNormal"><span>Звичайно, на кольоровій діаграмі представлені не всі кольори простору XYZ, але для порівняння колірних обхватів і перетворення колірних просторів, заради яких і створювалася ця колірна модель, фактор освітленості відтінків можна не розглядати.</span></p>
+										<p class="MsoNormal" style="text-align: justify;"><span>&nbsp;</span></p>
+										<p class="ListParagraph" style="margin: 0cm; text-align: center;" align="center"><span class="hps"><b><span>2.<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span></b></span><span class="hps"><b><span>Перетворення моделей</span></b></span></p>
+										<p class="ListParagraph" style="margin: 0cm; text-align: justify;"><span>Потреба перетворення зображення з однієї колірної моделі в іншу виникає досить часто, особливо якщо зображення готується для друку. До прикладу, на деяких етапах створення документа застосування колірної моделі RGB є неминучим (коли колірна модель RGB використовується сканером, цифровою камерою), але у документа, призначеного для друку, кінцевою колірною моделлю повинна бути модель CMYK. Звідси виникає необхідність конвертації моделей.</span></p>
+										<p class="ListParagraph" style="margin: 0cm; text-align: justify;"><span>Переходи між колірними моделями завжди пов’язані з якимись втратами кольорів через невідповідність колірного простору моделей. У моделі CMYK неможливо відобразити дуже яскраві кольори моделі RGB, модель RGB, в свою чергу, не здатна передати темні відтінки моделі CMYK, оскільки природа кольору різна. На жаль, втрати, спричинені перетворенням моделей, непоправні. </span></p>
+										<p class="ListParagraph" style="margin: 0cm; text-align: justify;"><span>&nbsp;</span></p>
+		                            </div>
+		                        </div>
+                            </div>
+                        </div>
+
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Перетворення моделей
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#collapseTwo">
+                            <div class="card-body">
+		                        <div class="card-header" id="headingRGBt">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseRGBt" aria-expanded="false" aria-controls="collapseRGBt">
+		                                    Перетворення RGB
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapseRGBt" class="collapse" aria-labelledby="headingRGBt" data-parent="#collapseThree">
+		                            <div class="card-body">
+										<p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Конвертування</span></span><span> <span class="hps">моделі</span> <span class="hps">RGB</span> <span class="hps">в</span> <span class="hps">будь-яку іншу</span> <span class="hps">колірну</span> <span class="hps">модель виконується</span> <span class="hps">після</span> <span class="hps">нормалізації</span> <span class="hps">значень</span> <span class="hps">її</span> <span class="hps">червоної</span>, <span class="hps">зеленої та синьої складових</span>. <span class="hps">Для</span> <span class="hps">цього значення</span> <span class="hps">яскравості</span> <span class="hps">по кожній складовій переводяться</span> <span class="hps">з діапазону [</span>0 .. 255] <span class="hps">в</span> <span class="hps">діапазон</span> <span class="hps">[</span>0 .. 1].</span></p>
+										<p class="MsoNormal" style="text-align: center;" align="center"><span class="hps"><b><i><span>&nbsp;</span></i></b></span></p>
+
+										<div class="card-header" id="headingRGBtCMYK">
+										   <h5 class="mb-0">
+											   <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseRGBtCMYK" aria-expanded="false" aria-controls="collapseRGBtCMYK">
+												   RGB у CMYK
+											   </button>
+										   </h5>
+									   </div>
+									   <div id="collapseRGBtCMYK" class="collapse" aria-labelledby="headingRGBtCMYK" data-parent="#collapseRGBt">
+										   <div class="card-body">
+											   <p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Перед</span></span><span> <span class="hps">конвертацією</span> <span class="hps">значення яскравостей</span> <span class="hps">за</span> <span class="hps">червоною, зеленою</span> <span class="hps">та синьою складовою</span> <span class="hps">нормалізуються</span>. <span class="hps">Основний</span> <span class="hps">принцип перетворення моделей полягає в наступному</span>:</span></p>
+												<p class="MsoNormal" style="text-align: justify;"><i><span>C</span></i><span>’</span><i><span>M</span></i><span>’</span><i><span>Y</span></i><span>’ = {1 - </span><i><span>R</span></i><span>, 1 - </span><i><span>G</span></i><span>, 1 - </span><i><span>B</span></i><span>}; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><i><span>K</span></i><span> = </span><span>min</span><span>{</span><i><span>C</span></i><span>’, </span><i><span>M</span></i><span>’, </span><i><span>Y</span></i><span>’}; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>CMYK</span><span> = {0, 0, 0, 1}, якщо &nbsp;</span><i><span>K</span></i><span> = 1;</span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>CMYK</span><span> = { (</span><i><span>C</span></i><span>’ -<i> </i></span><i><span>K</span></i><span>)/(1 -<i> </i></span><i><span>K</span></i><span>), (</span><i><span>M</span></i><span>’ -<i> </i></span><i><span>K</span></i><span>)/(1 - </span><i><span>K</span></i><span>), (</span><i><span>Y</span></i><span>’ - </span><i><span>K</span></i><span>)/(1 - </span><i><span>K</span></i><span>), </span><i><span>K</span></i><span>}.</span></p>
+												<p class="MsoNormal" style="text-align: center;" align="center"><b><i><span>&nbsp;</span></i></b></p>
+										   </div>
+									   </div>
+
+									   <div class="card-header" id="headingRGBtHSB">
+										   <h5 class="mb-0">
+											   <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseRGBtHSB" aria-expanded="false" aria-controls="collapseRGBtHSB">
+												   RGB у HSB
+											   </button>
+										   </h5>
+									   </div>
+									   <div id="collapseRGBtHSB" class="collapse" aria-labelledby="headingRGBtHSB" data-parent="#collapseRGBt">
+										   <div class="card-body">
+											   <p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>У</span></span><span> <span class="hps">ході</span> <span class="hps">перетворення значення</span> <span class="hps">яскравостей</span> <span class="hps">по</span> <span class="hps">червоній, зеленій</span> <span class="hps">і синій</span> <span class="hps">складовій</span>, які задані <span class="hps">в</span> <span class="hps">діапазоні</span> <span class="hps">[</span>0 .. 1], <span class="hps">конвертуються</span> <span class="hps">в модель</span> <span class="hps">HSB</span> <span class="hps">(</span>HSV). <span class="hps">Отримують</span> <span class="hps">значення</span> <span class="hps">в</span> <span class="hps">наступних діапазонах</span>: </span></p>
+							   					<p class="MsoNormal" style="text-align: justify;"><span class="hps"><i><span>Н</span></i></span><span> <span class="hps">–</span> <span class="hps">колірний тон</span> <span class="hps">(0-360°</span>)<span class="hps">;</span></span></p>
+							   					<p class="MsoNormal" style="text-align: justify;"><span class="hps"><i><span>S</span></i></span><span> <span class="hps">–</span> <span class="hps">насиченість</span> <span class="hps">(0-1);</span></span></p>
+							   					<p class="MsoNormal" style="text-align: justify;"><span class="hps"><i><span>B</span></i></span><span> <span class="hps">(</span><i>V</i>) <span class="hps">–</span> <span class="hps">яскравість</span> <span class="hps">(0-1).</span></span></p>
+							   					<p class="MsoNormal" style="text-align: justify;"><span class="hps"><i><span>Мах</span></i></span><span> <span class="hps">–</span> <span class="hps">функція визначення</span> <span class="hps">максимуму</span> <span class="hps">серед</span> <span class="hps">трьох складових</span> <span class="hps"><i>R</i></span>, <span class="hps"><i>G</i></span>, <span class="hps">і <i>B</i>.</span></span></p>
+							   					<p class="MsoNormal" style="text-align: justify;"><span class="hps"><i><span>Min</span></i></span><span class="hps"><span> – функція визначення</span></span><span> <span class="hps">мінімуму</span> <span class="hps">серед</span> <span class="hps">трьох складових</span> <span class="hps"><i>R</i></span>, <span class="hps"><i>G</i></span>, <span class="hps">і</span> <span class="hps"><i>B</i>.</span></span></p>
+							   					<p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Алгоритм</span></span><span> <span class="hps">перетворення</span> <span class="hps">RGB</span> <span class="hps">в</span> <span class="hps">HSB</span> <span class="hps">(</span>HSV) <span class="hps">такий</span>:</span></p>
+							   					<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image017.gif" style="display: block; margin-left: auto; margin-right: auto;" height="244" width="408"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (3)</span></p>
+							   					<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image018.gif" style="display: block; margin-left: auto; margin-right: auto;" height="103" width="251"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (4)</span></p>
+							   					<p class="MsoNormal" style="text-align: justify;"><span>&nbsp;</span></p>
+							   					<p class="MsoNormal" style="margin-bottom: .0001pt;"><span style="font-size: 12.0pt; display: none;">&nbsp;</span></p>
+										   </div>
+									   </div>
+
+									   <div class="card-header" id="headingRGBtHSL">
+										   <h5 class="mb-0">
+											   <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseRGBtHSL" aria-expanded="false" aria-controls="collapseRGBtHSL">
+												   RGB у HSL
+											   </button>
+										   </h5>
+									   </div>
+									   <div id="collapseRGBtHSL" class="collapse" aria-labelledby="headingRGBtHSL" data-parent="#collapseRGBt">
+										   <div class="card-body">
+											   <p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Початкові умови,</span></span><span> <span class="hps">діапазони</span> <span class="hps">змін</span> <span class="hps">і</span> <span class="hps">позначення аналогічні</span> <span class="hps">попередньому пункту</span>. <span class="hps">Алгоритм</span> </span><span class="hps"><span>перетворення</span></span><span> <span class="hps"><span>наведено</span></span><span> <span class="hps">нижче</span>.</span></span></p>
+												<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image017.gif" style="display: block; margin-left: auto; margin-right: auto;" height="244" width="408"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (5)</span></p>
+												<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image019.gif" style="display: block; margin-left: auto; margin-right: auto;" height="207" width="371"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (6)</span></p>
+												<p class="MsoNormal" style="text-align: center;" align="center"><b><i><span>&nbsp;</span></i></b></p>
+										   </div>
+									   </div>
+
+									   <div class="card-header" id="headingRGBtXYZ">
+										   <h5 class="mb-0">
+											   <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseRGBtXYZ" aria-expanded="false" aria-controls="collapseRGBtXYZ">
+												   RGB у XYZ
+											   </button>
+										   </h5>
+									   </div>
+									   <div id="collapseRGBtXYZ" class="collapse" aria-labelledby="headingRGBtXYZ" data-parent="#collapseRGBt">
+										   <div class="card-body">
+											   <p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Як і в попередньому підпункті, перед</span></span><span> <span class="hps">конвертацією</span> <span class="hps">значення яскравостей</span> <span class="hps">по</span> <span class="hps">червоній, зеленій</span> <span class="hps">та</span> <span class="hps">синій компонентах</span> <span class="hps">нормалізуються</span>. <span class="hps">Основний</span> <span class="hps">принцип перетворення полягає в наступному (<i>a</i></span> <span class="hps">=</span> <span class="hps">0.055):</span></span></p>
+							   					<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image020.gif" style="display: block; margin-left: auto; margin-right: auto;" height="84" width="319"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (7)</span></p>
+							   					<p class="MsoNormal" style="text-align: justify;"><span>&nbsp;</span></p>
+										   </div>
+									   </div>
+		                            </div>
+		                        </div>
+
+		                        <div class="card-header" id="headingtRGB">
+		                            <h5 class="mb-0">
+		                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapsetRGB" aria-expanded="false" aria-controls="collapsetRGB">
+		                                    Перетворення у RGB
+		                                </button>
+		                            </h5>
+		                        </div>
+		                        <div id="collapsetRGB" class="collapse" aria-labelledby="headingtRGB" data-parent="#collapseThree">
+		                            <div class="card-body">
+				                        <div class="card-header" id="headingHSLtRGB">
+				                            <h5 class="mb-0">
+				                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseHSLtRGB" aria-expanded="false" aria-controls="collapseHSLtRGB">
+				                                    HSL у RGB
+				                                </button>
+				                            </h5>
+				                        </div>
+				                        <div id="collapseHSLtRGB" class="collapse" aria-labelledby="headingHSLtRGB" data-parent="#collapsetRGB">
+				                            <div class="card-body">
+												<p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Діапазони зміни</span></span><span> <span class="hps">величин</span> <span class="hps">є такими</span>:</span></p>
+												<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-left: 14.2pt; text-align: justify;"><span class="hps"><span style="font-size: 14.0pt; font-family: Symbol;">·</span></span><span> <span class="hps">величина</span> <span class="hps"><i>H</i></span> <span class="hps">може приймати значення</span> <span class="hps">в</span> <span class="hps">діапазоні</span> <span class="hps">[0</span>, 360];</span></p>
+												<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-left: 14.2pt; text-align: justify;"><span class="hps"><span style="font-size: 14.0pt; font-family: Symbol;">·</span></span><span> <span class="hps">величини</span> <span class="hps"><i>S</i></span><i>, <span class="hps">L</span>, <span class="hps">R</span>, <span class="hps">G</span>, <span class="hps">B</span></i> <span class="hps">–</span> <span class="hps">у</span> <span class="hps">діапазоні</span> <span class="hps">[</span>0, 1].</span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Конвертація</span></span><span> <span class="hps">колірних</span> <span class="hps">моделей</span> <span class="hps">виконується</span> <span class="hps">згідно із такими правилами:</span></span></p>
+												<p class="MsoNormal" style="text-align: justify;"><sub><span><img src="./models_files/image021.gif" height="48" width="440"></span></sub></p>
+												<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image022.gif" style="display: block; margin-left: auto; margin-right: auto;" height="196" width="335"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span>(8)</span></p>
+												<p class="MsoNormal" style="text-align: right;" align="right"><sub><span><img src="./models_files/image023.gif" style="display: block; margin-left: auto; margin-right: auto;" height="47" width="356"></span></sub><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</span><span>(9)</span></p>
+
+				                            </div>
+				                        </div>
+
+				                        <div class="card-header" id="headingHSBtRGB">
+				                            <h5 class="mb-0">
+				                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseHSBtRGB" aria-expanded="false" aria-controls="collapseHSBtRGB">
+				                                    HSB у RGB
+				                                </button>
+				                            </h5>
+				                        </div>
+				                        <div id="collapseHSBtRGB" class="collapse" aria-labelledby="headingHSBtRGB" data-parent="#collapsetRGB">
+				                            <div class="card-body">
+												<p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Діапазони зміни</span></span><span> <span class="hps">величин</span> є <span class="hps">такими</span>:</span></p>
+												<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-left: 42.55pt; text-align: justify;"><span class="hps"><span style="font-size: 14.0pt; font-family: Symbol;">·</span></span><span> <span class="hps">величина</span> <span class="hps"><i>H</i></span> <span class="hps">може приймати значення</span> <span class="hps">в</span> <span class="hps">діапазоні</span> <span class="hps">[0</span>, 360];</span></p>
+												<p class="MsoNormal" style="margin-top: 0cm; margin-right: 0cm; margin-left: 42.55pt; text-align: justify;"><span class="hps"><span style="font-size: 14.0pt; font-family: Symbol;">·</span></span><span> <span class="hps">величини</span> <span class="hps"><i>S</i></span><i>, <span class="hps">V</span>, <span class="hps">R</span>, <span class="hps">G</span>, <span class="hps">B</span></i> <span class="hps">-</span> <span class="hps">в</span> <span class="hps">діапазоні</span> <span class="hps">[</span>0, 1].</span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span class="hps"><span>Конвертація</span></span><span> <span class="hps">колірних</span> <span class="hps">моделей</span> <span class="hps">виконується</span> <span class="hps">згідно з такими правилами</span>:</span></p>
+												<p class="MsoNormal" style="text-align: justify;"><i><span>H<sub>i</sub></span></i><span> = [<i>H</i> / 60] mod 6;</span></p>
+												<p class="MsoNormal" style="text-align: justify;"><i><span>f</span></i><span> = (<i>H</i> / 60) – <i>H<sub>i</sub></i>; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><i><span>p</span></i><span> = <i>V</i> (1 - <i>S</i>);</span></p>
+												<p class="MsoNormal" style="text-align: justify;"><i><span>q</span></i><span> = <i>V</i> (1 - <i>f S</i>); </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><i><span>t</span></i><span> = <i>V</i> (1 - (1 - <i>f</i> ) <i>S</i>);</span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>якщо <i>H<sub>i</sub></i> = 0 =&gt; <i>R</i> = <i>V</i>, <i>G</i> = <i>t</i>, <i>B</i> = <i>p</i>; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>якщо <i>H<sub>i</sub></i> = 1 =&gt; <i>R</i> = <i>q</i>, <i>G</i> = <i>V</i>, <i>B</i> = <i>p</i>; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>якщо <i>H<sub>i</sub></i> = 2 =&gt; <i>R</i> = <i>p</i>, <i>G</i> = <i>V</i>, <i>B</i> = <i>t</i>; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>якщо <i>Hi</i> = 3 =&gt; <i>R</i> = <i>p</i>, <i>G</i> = <i>q</i>, <i>B</i> = <i>V</i>; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>якщо <i>H<sub>i</sub></i> = 4 =&gt; <i>R</i> = <i>t</i>, <i>G</i> = <i>p</i>, <i>B</i> = <i>V</i>; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>якщо <i>H<sub>i</sub></i> = 5 =&gt; <i>R</i> = <i>V</i>, <i>G</i> = <i>p</i>, <i>B</i> = <i>q</i>.&nbsp; </span></p>
+												<p class="MsoNormal" style="text-align: justify;"><span>&nbsp;</span></p>
+											 </div>
+				                        </div>
+		                            </div>
+		                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+				<button type="button" class="btn btn-outline-secondary rounded-pill" onclick="location.href='../models/index.html'">
+					Перетворення колірних моделей
+				</button>
+				<button type="button" class="btn btn-outline-secondary rounded-pill" onclick="location.href='../index.html'">
+					&#9664; Назад
+				</button>
+    		</div>
+    	</div>
+	</div>
+
+	<!-- Modal -->
+
+
+  <script src="julia.js"></script>
+</body>
+
+</html>

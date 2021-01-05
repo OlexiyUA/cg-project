@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Fractals</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.min.js"></script>
+	<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+
+    	<div class="row">
+    		<div class="col-md-4">
+
+    			<button type="button" id="fractalButton" class="headerButton btn disabled">
+    				Фрактали
+    			</button>
+    		</div>
+    		<div class="col-md-4">
+
+    			<button type="button"  onclick="location.href='models.html';" id="colorSchemaButton" class="headerButton btn">
+    				Зміна колірної схеми
+    			</button>
+    		</div>
+    		<div class="col-md-4">
+
+    			<button type="button" onclick="location.href='affine.html';" id="AffineTransformationButton" class="headerButton btn">
+    				Афінні перетворення
+    			</button>
+    		</div>
+    	</div>
+
+        <br>
+
+    	<div class="row justify-content-center">
+    		<div class="col-md-6 card card-body bg-light">
+
+                <div class="" style="font-size: 14.0pt; line-height: 110%; text-indent: 1.0cm;"``>
+                    <div id="accordion">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Загальна інформація
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+								<h2 style="margin: 0cm; margin-bottom: .0001pt; text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></h2>
+								<h2 style="margin: 0cm; margin-bottom: .0001pt; text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt; font-weight: normal;" lang="UK">Виконання різноманітних дій з геометричними об’єктами є центральною задачею в комп’ютерній графіці. Тому вибір математичних методів і алгоритмів для її реалізації суттєво впливає на ефективність цілої графічної системи. У сучасній комп’ютерній графіці досить широко використовується метод координат, оскільки графічне зображення складається з пікселів, які задаються координатами. Крім цього, координати використовуються для опису розміщення об’єктів та для створення зображень шляхом перетворень з однієї системи координат в іншу.</span></h2>
+								<h2 style="margin: 0cm; margin-bottom: .0001pt; text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></h2>
+                            </div>
+                        </div>
+
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Найпростіші двовимірні афінні перетворення
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+
+								<h3 style="margin: 0cm; margin-bottom: .0001pt; text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt; font-weight: normal;" lang="UK">Афінним називається перетворення, що має такі властивостями:</span></h3>
+								<h3 style="margin: 0cm; margin-bottom: .0001pt; text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt; font-weight: normal;" lang="UK">● будь-яке афінне перетворення може бути представлене як послідовність операцій з числа найпростіших: зсув, розтягнення/стиснення, поворот;</span></h3>
+								<h3 style="margin: 0cm; margin-bottom: .0001pt; text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt; font-weight: normal;" lang="UK">● зберігаються прямі лінії, паралельність прямих, відношення довжин відрізків, що лежать на одній прямій, і відношення площ фігур.</span></h3>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><b><i><span style="font-size: 14.0pt;" lang="UK">Афінні перетворення координат на площині</span></i></b><span style="font-size: 14.0pt;" lang="UK">:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">(<i>X</i>, <i>Y</i>) –&nbsp;двовимірна система координат,</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">(<i>x</i>, <i>y</i>) –&nbsp;координати старої системи в новій системі координат.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image001.gif" height="57" width="144"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Загальний вигляд афінного перетворення:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image002.gif" height="84" width="187"></span></sub><span style="font-size: 14.0pt;" lang="UK">,</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">де<i> A</i>,<i> B</i>,<i> C</i>,<i> D</i>,<i> E</i>,<i> F</i></span><span style="font-size: 14.0pt;" lang="UK"> –&nbsp;константи.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Обернене перетворення теж є афінним</span><span style="font-size: 14.0pt;" lang="UK">:</span></p>
+								<p style="margin: 0cm; margin-bottom: .0001pt; text-indent: 34.0pt; background: white;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image003.gif" height="57" width="164"></span></sub></p>
+								<p style="margin: 0cm; margin-bottom: .0001pt; text-indent: 34.0pt; background: white;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt; letter-spacing: -.15pt;" lang="UK">Найпростіші афінні перетворення об’єкта на площині.</span></i><span style="font-size: 14.0pt;" lang="UK"> </span></p>
+								<p class="MsoNormal" style="margin-left: 0cm; text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">1.<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">Здвиг об’єкта:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image004.gif" height="57" width="92"></span></sub></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">або матрицею: <sub><img src="./affine_files/image005.gif" height="84" width="99"></sub>.</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 6" src="./affine_files/image006.jpg" height="108" width="178"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис. 1 Зсув об’єкта</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Обернене перетворення задається форму<a name="_GoBack"></a>лами :</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image007.gif" height="57" width="99"></span></sub></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">або відповідною матрицею:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image008.gif" height="84" width="108"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">Примітка! У літературі часто використовують іншу матрицю зсуву координат об’єкта:</span></i></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image009.gif" height="84" width="164"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">З використанням даної матриці, нові координати об’єкту утворюються внаслідок множення старих координат на дану матрицю </span></i><span style="font-size: 14.0pt;" lang="UK">[<i>X,Y,</i>1]=[<i>x,y</i>,1] <sub><img src="./affine_files/image010.gif" height="12" width="8"></sub><i>&nbsp;M.</i></span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="margin-left: 0cm; text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">2.<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">Масштабування об’єкту:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image011.gif" height="60" width="79"></span></sub><span style="font-size: 14.0pt;" lang="UK">,</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">а в матричній формі:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image012.gif" height="84" width="104"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 13" src="./affine_files/image013.jpg" height="138" width="163"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис. 2 Масштабування об’єкта</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Обернене перетворення задане:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image014.gif" height="60" width="87"></span></sub><span style="font-size: 14.0pt;" lang="UK">,</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">та відповідно матрицею</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image015.gif" height="84" width="128"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Коефіцієнти можуть бути від’ємними. Наприклад, при <i>k<sub>x</sub></i><sub> </sub>= -1 отримуємо дзеркальне відображення відносно осі <i>Y</i>.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Також варто зауважити, що у вище згаданих формулах йдеться про пропорційне зміщення всіх сторін об’єкту.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Якщо взяти загальну матричну перетворення <sub><img src="./affine_files/image016.gif" height="92" width="112"></sub>, то при <sub><img src="./affine_files/image017.gif" height="28" width="23"></sub>=<sub><img src="./affine_files/image018.gif" height="28" width="25"></sub>, а <sub><img src="./affine_files/image019.gif" height="28" width="24"></sub>=<sub><img src="./affine_files/image020.gif" height="28" width="23"></sub>=0 виконується пропорційне масштабування, при <sub><img src="./affine_files/image017.gif" height="28" width="23"><img src="./affine_files/image021.gif" height="16" width="16"><img src="./affine_files/image018.gif" height="28" width="25"></sub>, а <sub><img src="./affine_files/image019.gif" height="28" width="24"></sub>=<sub><img src="./affine_files/image020.gif" height="28" width="23"></sub>=0 – непропорційне.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">Примітка! У даних формулах йде мова про масштабування об’єкту та його переміщення. Якщо потрібно зробити чисте масштабування без ефекту переміщення, тоді варто об’єкт помістити в центр координат.</span></i></p>
+								<p class="MsoNormal" style="margin-left: 0cm; text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">3.<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">Поворот об’єкта відносно центру координат на кут α відповідає системі рівнянь:</span></p>
+								<p class="MsoNormal" style="margin-left: 34.0pt; text-align: justify;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image022.gif" height="57" width="184"></span></sub></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">або задається матрицею</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image023.gif" height="84" width="160"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 28" src="./affine_files/image024.jpg" height="146" width="191"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис. 3 Поворот об’єкта</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt; letter-spacing: -.15pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt; letter-spacing: -.15pt;" lang="UK">Обернене перетворення – поворот на кут (-α) задане системою рівнянь:</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image025.gif" height="57" width="171"></span></sub></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">та відповідною матрицею</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image026.gif" height="84" width="159"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<h3 style="margin: 0cm; margin-bottom: .0001pt; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></h3>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><b><i><span style="font-size: 14.0pt;" lang="UK">Увага</span></i></b><i><span style="font-size: 14.0pt;" lang="UK">! У всіх афінних перетвореннях, описаних вище, використовуються однорідні координати – це координати неоднорідного вектора </span></i><span style="font-size: 14.0pt;" lang="UK">[<i>x,y</i>]<i>, що є трійкою <sub><img src="./affine_files/image027.gif" height="25" width="69"></sub>, де <sub><img src="./affine_files/image028.gif" height="40" width="167"></sub>&nbsp;деяке дійсне число. Зазвичай використовують вектор <sub><img src="./affine_files/image029.gif" height="24" width="55"></sub>. При бажанні можна користуватись звичайними координатами, але формули матимуть наступний матричний вигляд:</i></span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">зсув - <sub><img src="./affine_files/image030.gif" height="57" width="139"></sub>,</span></i></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">масштаб: <sub><img src="./affine_files/image031.gif" height="57" width="136"></sub>,</span></i></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">поворот: <sub><img src="./affine_files/image032.gif" height="57" width="191"></sub>,</span></i></p>
+								<p class="MsoNormal" style="text-align: justify;"><i><span style="font-size: 14.0pt;" lang="UK">де K – матриця координат об’єкту до перетворення, <sub><img src="./affine_files/image033.gif" height="23" width="25"></sub>&nbsp;– після перетворення.</span></i></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></i></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></i></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><i><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></i></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+							</div>
+                        </div>
+
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Тривимірні перетворення
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify;"><b><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></b></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Подібно до двовимірних афінних перетворень, під час роботи з якими з використанням однорідних координат, здійснюють дії над матрицями 3х3, тривимірні перетворення можуть бути представлені матрицею 4х4.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Отже, аналогічно двовимірному випадку матриця зсуву матиме вигляд:</span></p>
+								<p class="MsoNormal" style="text-align: justify;"><i><span style="font-size: 14.0pt;" lang="UK">M</span></i><span style="font-size: 14.0pt;" lang="UK">=<sub><img src="./affine_files/image034.gif" height="112" width="116"></sub>,</span></p>
+								<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 14.0pt;" lang="UK">а нові координати обчислюватимуться за формулою[<i>X,Y,Z,</i>1]= [<i>x,y,z</i>,1]<sub><img src="./affine_files/image010.gif" height="12" width="8"></sub><i>M.</i></span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 35.4pt;"><span style="font-size: 14.0pt;" lang="UK">Матриця масштабування –</span></p>
+								<p class="MsoNormal" style="text-align: justify;"><i><span style="font-size: 14.0pt;" lang="UK">S</span></i><span style="font-size: 14.0pt;" lang="UK">=<sub><img src="./affine_files/image035.gif" height="112" width="131"></sub></span></p>
+								<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 14.0pt;" lang="UK">тоді нові координати обчислюватимуться за формулою[<i>X,Y,Z,</i>1]=[<i>x,y,z</i>,1] <sub><img src="./affine_files/image010.gif" height="12" width="8"></sub><i>&nbsp;S.</i></span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 18.0pt;"><span style="font-size: 14.0pt;" lang="UK">Стосовно матриці повороту, то в залежності від вибраної осі матимемо такі матриці:</span></p>
+								<p class="MsoNormal" style="margin-left: 36.0pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt;" lang="UK">-<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">поворот відносно осі OZ:</span></p>
+								<p class="MsoNormal" style="margin-left: 36.0pt; text-align: justify;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image036.gif" height="112" width="207"></span></sub><span style="font-size: 14.0pt;" lang="UK">,</span></p>
+								<p class="MsoNormal" style="margin-left: 36.0pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt;" lang="UK">-<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">поворот відносно осі OX:</span></p>
+								<p class="MsoNormal" style="margin-left: 36.0pt; text-align: justify;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image037.gif" height="112" width="208"></span></sub><span style="font-size: 14.0pt;" lang="UK">,</span></p>
+								<p class="MsoNormal" style="margin-left: 36.0pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt;" lang="UK">-<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">поворот відносно осі OZ:</span></p>
+								<p class="MsoNormal" style="margin-left: 36.0pt; text-align: justify;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image038.gif" height="112" width="211"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Для обчислення нових координат застосовується формула [<i>X,Y,Z,</i>1]=[<i>x,y,z</i>,1] <sub><img src="./affine_files/image010.gif" height="12" width="8"></sub><i>&nbsp;P.</i></span></p>
+								<span style="font-size: 14.0pt; font-family: &#39;Times New Roman&#39;;" lang="UK"><br style="page-break-before: always;" clear="all"> </span>
+                            </div>
+                        </div>
+
+                        <div class="card-header" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Визначення матриці перетворень
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                            <div class="card-body">
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><i><span style="font-size: 14.0pt;" lang="UK">Складним</span></i><span style="font-size: 14.0pt;" lang="UK"> (комбінованим)&nbsp; називається&nbsp; перетворення,&nbsp; яке&nbsp; містить ланцюжок базових перетворень (не менше двох). Зауважимо, що майже всі афінні перетворення залежать від порядку їх виконання. Наприклад, перетворення повороту не комутативні (<sub><img src="./affine_files/image039.gif" height="21" width="84"></sub>).</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><span style="font-size: 14.0pt;" lang="UK">Найчастіше на практиці для визначення матриці перетворень використовують рівняння:</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 1.0cm;" align="center"><i><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image040.gif" height="23" width="88"></span></sub></i><i><span style="font-size: 14.0pt;" lang="UK">,</span></i></p>
+								<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 14.0pt;" lang="UK">що випливає із рівняння афінних перетворень<i> <sub><img src="./affine_files/image041.gif" height="23" width="88"></sub>, де K </i>– матриця координат об’єкту до перетворення,<i> <sub><img src="./affine_files/image033.gif" height="23" width="25"></sub>&nbsp;</i>– після перетворення<i>, М – </i>матриця перетворення<i>.</i></span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><b><i><span style="font-size: 14.0pt;" lang="UK">Приклад 1.</span></i></b><span style="font-size: 14.0pt;" lang="UK"> Знайти матрицю перетворення трикутника&nbsp; <i>Р<sub>1</sub>Р<sub>2</sub>Р<sub>3</sub></i> у трикутник&nbsp; <i>P<sub>1</sub>′P<sub>2</sub>′P<sub>3</sub></i>′ (рис. 4)</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 1.0cm;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 50" src="./affine_files/image042.jpg" height="326" width="381"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 1.0cm;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис. 4 Перетворення трикутників</span></p>
+								<p class="MsoNormal" style="text-indent: 1.0cm;"><span style="font-size: 14.0pt;" lang="UK">Однорідні&nbsp; координати&nbsp; вершин&nbsp; трикутника&nbsp; <i>Р<sub>1</sub>Р<sub>2</sub>Р<sub>3</sub></i>&nbsp; складають&nbsp; матрицю</span></p>
+								<p class="MsoNormal" style="text-indent: 1.0cm;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image043.gif" height="84" width="136"></span></sub><span style="font-size: 14.0pt;" lang="UK">, а трикутника <i>P<sub>1</sub>′P<sub>2</sub>′P<sub>3</sub></i>′ – <sub><img src="./affine_files/image044.gif" height="84" width="144"></sub>.</span></p>
+								<p class="MsoNormal"><span style="font-size: 14.0pt;" lang="UK">Зі співвідношення <i><sub><img src="./affine_files/image040.gif" height="23" width="88"></sub>&nbsp;</i>отримаємо: <sub><img src="./affine_files/image045.gif" height="84" width="135"></sub>.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<span style="font-size: 14.0pt; font-family: &#39;Times New Roman&#39;;" lang="UK"><br style="page-break-before: always;" clear="all"> </span>
+                            </div>
+                        </div>
+
+                        <div class="card-header" id="headingFive">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Правила виконання перетворень
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                            <div class="card-body">
+								<p class="MsoNormal" style="margin-left: 46.35pt;"><b><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></b></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><span style="font-size: 14.0pt;" lang="UK">Для представлення даних та виконання різноманітних перетворень використовуються певні узгодження. Найбільшу увагу потрібно приділяти формулюванню завдання та інтерпретації результатів. Наприклад, перед виконанням повороту необхідно отримати відповіді на наступні питання:</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt; font-family: Wingdings;" lang="UK">Ø<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">У правосторонній чи лівосторонній системі координат (</span><span class="apple-converted-space"><span style="font-size: 9.0pt; font-family: Arial; color: #717171; background: white;" lang="UK">&nbsp;</span></span><span style="font-size: 14.0pt;" lang="UK">у залежності від взаємного розміщення напрямків координатних осей, розрізняють правосторонню та лівосторонню координатні системи, рис. 4) визначаються координатні вектори?</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt; font-family: Wingdings;" lang="UK">Ø<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">Обертається об'єкт або система координат?</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt; font-family: Wingdings;" lang="UK">Ø<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">Поворот здійснюється за чи проти годинникової стрілки?</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt; font-family: Wingdings;" lang="UK">Ø<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">Координати записуються у вигляді рядка або стовпця матриці? </span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt; font-family: Wingdings;" lang="UK">Ø<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">Навколо якої лінії або осі здійснюється поворот?</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: center;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 55" src="./affine_files/image046.jpg" height="246" width="249"></span><span style="font-size: 14.0pt;" lang="EN-US">&nbsp;</span><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 56" src="./affine_files/image047.jpg" height="242" width="245"></span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: center;" align="center"><span style="font-size: 14.0pt;" lang="UK">а)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; б)</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: center;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис.5. Типи систем координат а) правостороння; б) лівостороння.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Нехай маємо правосторонню систему координат, об'єкт обертається в нерухомій координатної системі, поворот визначається правилом правої руки (тобто поворот за годинниковою стрілкою) і координатні вектори представляються у вигляді рядка матриці.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;Так як вектор задається рядком матриці, то матрицю перетворення слід розмістити після даних (матриці координатних векторів). Це перетворення задається шляхом множення справа. У разі однорідних координат для повороту об'єкта за годинникової стрілкою на кут навколо початку координат (осі <i>OZ</i>) використання множення праворуч приводить до наступного результату:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image048.gif" height="84" width="288"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Якщо ми виразимо координатні вектори, задані в однорідних координатах у вигляді стовпця матриці, то поворот можна виконати наступним чином:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image049.gif" height="84" width="236"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Для того, щоб повернути систему координат і залишити незмінними координатні вектори, необхідно кут <sub><img src="./affine_files/image050.gif" height="16" width="17"></sub>&nbsp;замінити на <sub><img src="./affine_files/image051.gif" height="16" width="28"></sub>.</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 61" src="./affine_files/image052.jpg" height="401" width="329"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис. 6. Перетворення координатних векторів та системи координат</span></p>
+								<span style="font-size: 14.0pt; font-family: &#39;Times New Roman&#39;;" lang="UK"><br style="page-break-before: always;" clear="all"> </span>
+                            </div>
+                        </div>
+
+                        <div class="card-header" id="headingFive">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Приклади афінних перетворень
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                            <div class="card-body">
+								<p class="MsoNormal" style="margin-left: 46.35pt;"><b><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></b></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><b><i><span style="font-size: 14.0pt;" lang="UK">Приклад 1. </span></i></b><span style="font-size: 14.0pt;" lang="UK">Повернути трикутник АВС з координатами (3;-1), (4;1), (2;1) на 90<sup>о</sup> проти часової стрілки відносно початку координат. </span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Використовуючи матрицю координат 3х2 та формули повороту отримаємо:</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image053.gif" height="84" width="444"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 63" src="./affine_files/image054.jpg" height="305" width="328"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис. 7. Поворот трикутника АВС в <sub><img src="./affine_files/image055.gif" height="24" width="59"></sub></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><b><i><span style="font-size: 14.0pt;" lang="UK">Приклад 2.</span></i></b><span style="font-size: 14.0pt;" lang="UK"> Відобразити трикутник DEF з координатами (8;1), (7;3), (6;2) спочатку відносно осі <i>Y</i>=0 у трикутник <sub><img src="./affine_files/image056.gif" height="23" width="63"></sub>, а потім відносно прямої <i>x=y </i>у трикутник <sub><img src="./affine_files/image057.gif" height="23" width="68"></sub>.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Відображення відносно осі <i>Y</i>=0:</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image058.gif" height="84" width="219"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Відображення відносно прямої <i>x=y</i>:</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image059.gif" height="84" width="195"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 69" src="./affine_files/image060.jpg" height="343" width="326"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис. 8. Відображення трикутника DEF</span></p>
+								<p class="MsoNormal" style="text-indent: 34.0pt;"><b><span style="font-size: 14.0pt;" lang="UK">Приклад 3.</span></b></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Нехай задано трикутник ABC з координатами (2;2), (4;2), (4;4). Знайти координати нового трикутника, повернутого на 90<sup>о </sup>відносно початку координат та відображеного відносно прямої <i>y=-x.</i></span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Перша матриця повороту має вигляд:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><b><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></b></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image061.gif" height="57" width="103"></span></sub></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Матриця відображення відносно <i>y=-x</i> відповідно рівна:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image062.gif" height="57" width="112"></span></sub></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Результатом повороту та відображення координат <i>K</i> трикутника ABC будуть координати <i>K<sup>*</sup></i>:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image063.gif" height="24" width="116"></span></sub><span style="font-size: 14.0pt;" lang="UK">,</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image064.gif" height="84" width="298"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><span style="font-size: 14.0pt;" lang="UK">Якщо провести перетворення в оберненому порядку (спочатку відображення, а потім поворот), то отримаємо трикутник <sub><img src="./affine_files/image056.gif" height="23" width="63"></sub>:</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 34.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image065.gif" height="84" width="302"></span></sub><span style="font-size: 14.0pt;" lang="UK">.</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 76" src="./affine_files/image066.jpg" height="358" width="370"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис. 9. Комбінований поворот та відображення трикутника ABC (<sub><img src="./affine_files/image067.gif" height="24" width="65"></sub>– проміжний трикутник прямої задачі, <sub><img src="./affine_files/image057.gif" height="23" width="68"></sub>– проміжний трикутник оберненої задачі)</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><b><i><span style="font-size: 14.0pt;" lang="UK">Приклад 4.</span></i></b><span style="font-size: 14.0pt;" lang="UK"> Побудувати матрицю повороту точки <i>M</i>(<i>x, y</i>) відносно довільної точки <i>N</i>(<i>m, n</i>) на кут </span><i><span style="font-size: 14.0pt; font-family: &#39;Lucida Sans Unicode&#39;;" lang="UK">ϕ</span></i><span style="font-size: 14.0pt;" lang="UK"> у додатному напрямку.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><span style="font-size: 14.0pt;" lang="UK">Однорідні координати дають можливість знайти матрицю повороту відносно довільної точки. У загальному випадку поворот відносно довільної точки може бути реалізований шляхом таких перетворень: </span></p>
+								<p class="MsoNormal" style="margin-left: 49.65pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt;" lang="UK">1)<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">переміщення точки <i>N</i>(<i>m, n</i>) на вектор (–<i>m, –n</i>) так, щоб центр повороту сумістився з початком координат. Матриця цього перетворення має вигляд:</span></p>
+								<p class="MsoNormal" style="margin-left: 64.35pt; text-align: justify;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify; text-indent: 18.0pt;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image068.gif" height="84" width="116"></span></sub></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify; text-indent: -18.0pt;"><span style="font-size: 14.0pt;" lang="UK">2)<span style="font: 7.0pt &#39;Times New Roman&#39;;">&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span style="font-size: 14.0pt;" lang="UK">поворот точки на кут </span><i><span style="font-size: 14.0pt; font-family: &#39;Lucida Sans Unicode&#39;;" lang="UK">ϕ</span></i><span style="font-size: 14.0pt;" lang="UK"> у додатному напрямку відносно початку координат. Матриця цього перетворення визначається формулою:</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt; text-align: justify;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image023.gif" height="84" width="160"></span></sub></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 35.4pt;"><span style="font-size: 14.0pt;" lang="UK">Отже, для знаходження результуючого повороту точки <i>M</i>(<i>x, y</i>) відносно точки <i>N</i>(<i>m, n</i>) потрібно перемножити задані матриці за вказаним порядком:</span></p>
+								<p class="MsoNormal" style="margin-left: 46.35pt;"><span style="font-size: 14.0pt;" lang="UK">[<i>X,Y</i>,1] =[<i>x,y</i>,1] <sub><img src="./affine_files/image068.gif" height="84" width="116"><img src="./affine_files/image023.gif" height="84" width="160"><img src="./affine_files/image069.gif" height="84" width="92"></sub>.</span></p>
+								<p class="MsoNormal" style="text-indent: 1.0cm;"><b><i><span style="font-size: 14.0pt;" lang="UK">Приклад 5.</span></i></b><span style="font-size: 14.0pt;" lang="UK"> Нехай задано рівняння прямої <i>L</i> <sub><img src="./affine_files/image070.gif" height="47" width="96"></sub>&nbsp;та трикутник ABC з координатами вершин (2,4,1), (4,6,1), (2,6,1). Дзеркально відобразити трикутник відносно даної прямої.</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><span style="font-size: 14.0pt;" lang="UK">Пряма <i>L </i>&nbsp;пройде через початок координат під час зсуву її на 2 одиниці по осі <i>ОY</i> (матриця зсуву матиме вигляд – <sub><img src="./affine_files/image071.gif" height="84" width="99"></sub>).&nbsp; В результаті повороту навколо початку координат на <sub><img src="./affine_files/image072.gif" height="47" width="144"></sub>&nbsp;пряма співпаде з віссю <i>ОХ </i>(матриця повороту матиме вигляд – <sub><img src="./affine_files/image073.gif" height="100" width="168"></sub>). Далі необхідно дзеркально відобразити об’єкт за допомогою матриці дзеркального відображення <sub><img src="./affine_files/image074.gif" height="84" width="96"></sub>&nbsp;і повернутись в початкову орієнтацію. Комбінація перетворень матиме вигляд:</span></p>
+								<p class="MsoNormal" style="text-align: justify;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image075.gif" height="84" width="136"><img src="./affine_files/image073.gif" height="100" width="168"><img src="./affine_files/image074.gif" height="84" width="96"><img src="./affine_files/image076.gif" height="100" width="175"><img src="./affine_files/image077.gif" height="84" width="100"></span></sub><span style="font-size: 14.0pt;" lang="UK">=<sub><img src="./affine_files/image078.gif" height="84" width="152"></sub>.</span></p>
+								<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 14.0pt;" lang="UK">Отже, координати нового трикутника матимуть будуть такими:</span></p>
+								<p class="MsoNormal" style="text-align: justify;"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: justify; text-indent: 1.0cm;"><sub><span style="font-size: 14.0pt;" lang="UK"><img src="./affine_files/image079.gif" height="84" width="87"><img src="./affine_files/image078.gif" height="84" width="152"></span></sub><span style="font-size: 14.0pt;" lang="UK">=<sub><img src="./affine_files/image080.gif" height="84" width="144"></sub>.</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 1.0cm;" align="center"><span style="font-size: 14.0pt;" lang="UK">&nbsp;</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 1.0cm;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 98" src="./affine_files/image081.jpg" height="215" width="492"></span></p>
+								<p class="MsoNormal" style="margin-left: 106.2pt; text-indent: 35.4pt;"><span style="font-size: 14.0pt;" lang="UK">а) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; б)</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 1.0cm;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 99" src="./affine_files/image082.jpg" height="196" width="492"></span></p>
+								<p class="MsoNormal" style="margin-left: 106.2pt; text-indent: 35.4pt;"><span style="font-size: 14.0pt;" lang="UK">в) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; г)</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 1.0cm;" align="center"><span style="font-size: 14.0pt;" lang="EN-US"><img id="Рисунок 100" src="./affine_files/image083.jpg" height="182" width="261"></span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">д)</span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">Рис 10. Відображення відносно будь-якої кривої </span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">а)початкове та кінцеве положення трикутника; </span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">б)зсув прямої в початок координат; </span></p>
+								<p class="MsoNormal" style="text-align: center; text-indent: 34.0pt;" align="center"><span style="font-size: 14.0pt;" lang="UK">в)поворот прямої та її спів падіння з віссю <i>ОХ</i>; </span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+				<button type="button" class="btn btn-outline-secondary rounded-pill" onclick="location.href='../affine/index.html'">
+					Афінні перетворення
+				</button>
+				<button type="button" class="btn btn-outline-secondary rounded-pill" onclick="location.href='../index.html'">
+					&#9664; Назад
+				</button>
+    		</div>
+    	</div>
+	</div>
+
+	<!-- Modal -->
+
+
+  <script src="julia.js"></script>
+</body>
+
+</html>
